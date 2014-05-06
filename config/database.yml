@@ -10,7 +10,7 @@ development:
   timeout: 5000
   username: root
   password:
-  encoding: UTF8
+  encoding: utf8
   reconnect: true
 
 # Warning: The database defined as "test" will be erased and
@@ -22,7 +22,7 @@ test:
   timeout: 5000
   username: root
   password:
-  encoding: UTF8
+  encoding: utf8
   reconnect: true
 
 production:
@@ -31,5 +31,5 @@ production:
   timeout: 5000
   username: root
   password:
-  encoding: UTF8
+  encoding: utf8
   reconnect: true
