@@ -1,0 +1,55 @@
+<div class="row-fluid">
+  <div class="span12 actions">
+    <div class="page-header">
+      <%= link_to 'Registra un Cliente!', new_client_path, :class => 'btn btn-primary btn-large pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <% if @clients.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Nombre Completo</th>
+          <th>Vehiculos</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @clients.each do |client| %>
+          <tr>
+            <td><%= link_to client.full_name, client_path(client) %></td>
+            <td><%= client.vehicles ? client.vehicles.count : '0' %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="delete">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="<%= edit_client_path(client) %>"><i class="icon-edit"></i> Editar</a>
+                  </li>
+                  <li>
+                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), client_path(product), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+    <h3>Aún no hay clientes registrados :(</h3>
+    <% end %>
+  </div>
+</div>
