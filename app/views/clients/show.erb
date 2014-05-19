@@ -1,0 +1,37 @@
+<div class="row-fluid">
+  <div class="span12 actions">
+    <div class="page-header">
+      <%= link_to 'Volver!', clients_path, :class => 'btn pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h3>Información Personal</h3>
+    <dl>
+      <dt>Nombre completo</dt>
+      <dd><%= @client.full_name %></dd>
+      <dt>RUT</dt>
+      <dd><%= @client.format_rut %></dd>
+      <dt>Email</dt>
+      <dd><%= @client.email %></dd>
+      <dt>Teléfono de contacto</dt>
+      <dd><%= @client.contact_phone %></dd>
+      <dt>Dirección</dt>
+      <dd><%= @client.address %></dd>
+      <dt>Comentarios</dt>
+      <dd><%= @client.comments %></dd>
+    </dl>
+  </div>
+
+  <div class="span6">
+    <% if @vehicles.any? %>
+      <h3>Vehículos</h3>
+
+    <% else %>
+    <h3>Sin vehículos registrados</h3>
+    <% end %>
+    <button>Agregar Vehículo</button>
+  </div>
+</div>

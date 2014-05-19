@@ -1,0 +1,73 @@
+<%= form_for @client, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+
+    <% if @client.errors.any? %>
+      <div class="span12 alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+
+        <p>Hay <%= pluralize(@client.errors.count, "error", "errores") %>
+          :
+        </p>
+        <ul>
+          <% @client.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :names, "Nombres", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :names %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :last_names, "Apellidos", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :last_names %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :rut, "Rut", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :rut %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :address, "Dirección", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :address %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :email, "Email", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :email %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :contact_phone, "Teléfono de contacto", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :contact_phone %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :comments, "Comentarios", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_area :comments, rows: 4 %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Guardar", :class => "btn btn-primary" %>
+    </div>
+
+  </fieldset>
+<% end %>

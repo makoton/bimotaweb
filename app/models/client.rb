@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Client < ActiveRecord::Base
 
+  #accessors
+  attr_accessible :names, :last_names, :rut, :address, :contact_phone, :comments, :email
+
   #scopes
 
   #relations
@@ -11,6 +14,9 @@ class Client < ActiveRecord::Base
 
   #callbacks
   before_create :strip_rut
+
+  #validations
+  validates_presence_of :names, :last_names, :rut
 
   #business methods
 

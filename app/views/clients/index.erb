@@ -39,7 +39,7 @@
                     <a href="<%= edit_client_path(client) %>"><i class="icon-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), client_path(product), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
+                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), client_path(client), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
                   </li>
                 </ul>
               </div>
