@@ -25,7 +25,7 @@ class Client < ActiveRecord::Base
   end
 
   def strip_rut
-    self.rut = rut.gsub('.', '').gsub('-','')
+    self.rut = rut.gsub('.', '').gsub('-','').gsub(' ','')
   end
 
   def format_rut

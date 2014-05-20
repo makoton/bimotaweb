@@ -31,5 +31,7 @@ gem 'jquery-rails'
 gem 'cancan'
 gem 'devise'
 gem 'awesome_print'
+gem 'kaminari'
+gem 'devise-i18n'
 
 ruby '2.1.1'

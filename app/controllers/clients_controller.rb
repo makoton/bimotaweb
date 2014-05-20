@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
 
   def index
     @page_title = 'Clientes'
-    @clients = Client.all
+    @clients = Client.page params[:page]
   end
 
   def new
