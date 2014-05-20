@@ -24,6 +24,10 @@ class Client < ActiveRecord::Base
     "#{names} #{last_names}"
   end
 
+  def short_name
+    "#{names.split(' ').first} #{last_names.split(' ').first}"
+  end
+
   def strip_rut
     self.rut = rut.gsub('.', '').gsub('-','').gsub(' ','')
   end

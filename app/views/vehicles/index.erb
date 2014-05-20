@@ -1,7 +1,7 @@
 <div class="row-fluid">
   <div class="span12 actions">
     <div class="page-header">
-      <%= link_to 'Registra un Cliente!', new_client_path, :class => 'btn btn-primary btn-large pull-right' %>
+      <%= link_to 'Ingresa un Vehículo!', new_vehicle_path, :class => 'btn btn-primary btn-large pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
@@ -9,34 +9,34 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <% if @clients && @clients.any? %>
+    <% if @vechicles && @vechicles.any? %>
       <table class="table table-striped">
         <thead>
         <tr>
-          <th>Nombre Completo</th>
-          <th>RUT</th>
-          <th>Número de contacto</th>
-          <th>Vehiculos</th>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+          <th>Nombre Cliente</th>
           <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-        <% @clients.each do |client| %>
+        <% @vechicles.each do |vehicle| %>
           <tr>
-            <td><%= link_to client.full_name, client_path(client) %></td>
-            <td><%= client.format_rut %></td>
-            <td><%= client.contact_phone %></td>
-            <td><%= client.vehicles ? client.vehicles.count : '0' %></td>
+            <td><%= link_to vehicle.brand, vehicle_path(vehicle) %></td>
+            <td><%= vehicle.model %></td>
+            <td><%= vehicle.year %></td>
+            <td><%= vehicle.owner ? vehicle.owner.short_name : 'Sin Dueño' %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<%= edit_client_path(client) %>"><i class="icon-edit"></i> Editar</a>
+                    <a href="<%= edit_vehicle_path(vehicle) %>"><i class="icon-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), client_path(client), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
+                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), vehicle_path(vehicle), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este vehículo?" if can? :manage, Vehicle %>
                   </li>
                 </ul>
               </div>
@@ -46,7 +46,7 @@
         </tbody>
       </table>
     <% else %>
-      <h3>Aún no hay clientes registrados :(</h3>
+      <h3>Aún no hay vehículos ingresados :(</h3>
     <% end %>
   </div>
 </div>
@@ -54,10 +54,10 @@
 <div class="row-fluid">
   <div class="span12">
     <div class="text-center">
-      <%= paginate @clients %>
+      <%= paginate @vehicles %>
     </div>
     <div class="pull-right">
-      <%= page_entries_info @clients %>
+      <%= page_entries_info @vehicles %>
     </div>
   </div>
 </div>

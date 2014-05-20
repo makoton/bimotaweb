@@ -8,4 +8,5 @@ Bimotaweb::Application.routes.draw do
   resources :clients
   resources :orders
   resources :supplies
+  resources :vehicles
 end

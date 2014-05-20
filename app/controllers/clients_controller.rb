@@ -28,7 +28,13 @@ class ClientsController < ApplicationController
   end
 
   def update
-
+    @client = Client.find(params[:id])
+    if @client.update_attributes(params[:client])
+      flash[:success] = "Se modificó correctamente el cliente #{@client.short_name}"
+      redirect_to clients_path and return
+    else
+      render :edit
+    end
   end
 
   def destroy
