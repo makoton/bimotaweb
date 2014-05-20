@@ -13,7 +13,11 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    @vehicle = Vehicle.new(params[:vehicle])
+    if params[:type] == 'auto'
+      @vehicle = CarVehicle.new(params[:vehicle])
+    else
+      @vehicle = BikeVehicle.new(params[:vehicle])
+    end
 
     if @vehicle.save
       flash[:success] = 'Vehículo guardado con éxito!'
