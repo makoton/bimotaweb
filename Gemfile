@@ -31,6 +31,7 @@ end
 gem 'jquery-rails'
 gem 'cancan'
 gem 'devise'
+gem 'devise_invitable'
 gem 'awesome_print'
 gem 'kaminari'
 gem 'devise-i18n'
