@@ -9,7 +9,7 @@
 
 <div class="row-fluid">
   <div class="span12">
-    <% if @vechicles && @vechicles.any? %>
+    <% if @vehicles && @vehicles.any? %>
       <table class="table table-striped">
         <thead>
         <tr>
@@ -21,12 +21,12 @@
         </tr>
         </thead>
         <tbody>
-        <% @vechicles.each do |vehicle| %>
+        <% @vehicles.each do |vehicle| %>
           <tr>
             <td><%= link_to vehicle.brand, vehicle_path(vehicle) %></td>
             <td><%= vehicle.model %></td>
             <td><%= vehicle.year %></td>
-            <td><%= vehicle.owner ? vehicle.owner.short_name : 'Sin Dueño' %></td>
+            <td><%= vehicle.client ? vehicle.client.short_name : 'Sin Dueño' %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>

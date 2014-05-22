@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="row-fluid">
-  <div class="span8">
+  <div class="span6">
     <h3 style="text-align: center;">Información Personal</h3>
     <dl style="margin-left: 2%;">
       <dt>Nombre completo</dt>
@@ -26,13 +26,33 @@
     </dl>
   </div>
 
-  <div class="span4">
+  <div class="span6">
     <% if @vehicles.any? %>
       <h3>Vehículos</h3>
 
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @vehicles.each do |v| %>
+            <tr>
+              <td><%= v.brand %></td>
+              <td><%= v.model %></td>
+              <td><%= link_to 'Ver más', vehicle_path(v) %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
     <% else %>
-    <h3>Sin vehículos registrados</h3>
+      <h3>Sin vehículos registrados</h3>
     <% end %>
-    <button class="btn btn-primary">Agregar Vehículo</button>
+    <%= link_to 'Agregar Vehículo', new_vehicle_path(client: @client.id), class: 'btn btn-primary' %>
   </div>
 </div>

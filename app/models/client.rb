@@ -3,7 +3,6 @@ class Client < ActiveRecord::Base
 
   #accessors
   attr_accessible :names, :last_names, :rut, :address, :contact_phone, :comments, :email
-
   #scopes
 
   #relations

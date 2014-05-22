@@ -61,13 +61,16 @@
     <div class="control-group">
       <%= label_tag :type, "Tipo", class: "control-label" %>
       <div class="controls">
-        <%= select_tag :type, options_for_select([['Automóvil', 'auto'], ['Motocicleta', 'moto']]), include_blank: 'Selecciona' %>
+        <%= select_tag :type, options_for_select([['Automóvil', 'auto'], ['Motocicleta', 'moto']]), include_blank: 'Selecciona', :required => 'required', :oninvalid => "this.setCustomValidity('Selecciona un tipo de vehículo.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
-
-    <div class="form-actions">
-      <%= f.submit "Guardar", :class => "btn btn-primary" %>
-    </div>
-
+    <%= hidden_field_tag :client, params[:client] %>
   </fieldset>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="form-actions">
+        <%= f.submit "Guardar", :class => "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
 <% end %>

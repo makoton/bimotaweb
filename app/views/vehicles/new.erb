@@ -2,7 +2,7 @@
   <div class="span12 actions">
     <div class="page-header">
       <%= link_to 'Volver!', vehicles_path, :class => 'btn pull-right' %>
-      <h2><%= @page_title %></h2>
+      <h2><%= @page_title %><%= " para #{@client.short_name}" if @client %></h2>
     </div>
   </div>
 </div>

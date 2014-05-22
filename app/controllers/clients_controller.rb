@@ -14,7 +14,6 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(params[:client])
-
     if @client.save
       redirect_to client_path(@client)
     else

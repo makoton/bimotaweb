@@ -4,10 +4,13 @@ class VehiclesController < ApplicationController
 
   def index
     @page_title = 'Vehículos'
-    @vehicles = Vehicle.page params[:page]
+    @vehicles = Vehicle.order('created_at DESC').page params[:page]
   end
 
   def new
+    if params[:client]
+      @client = Client.find params[:client]
+    end
     @page_title = 'Nuevo Vehículo'
     @vehicle = Vehicle.new
   end
@@ -17,6 +20,10 @@ class VehiclesController < ApplicationController
       @vehicle = CarVehicle.new(params[:vehicle])
     else
       @vehicle = BikeVehicle.new(params[:vehicle])
+    end
+
+    unless params[:client].blank?
+      @vehicle.client = Client.find params[:client]
     end
 
     if @vehicle.save

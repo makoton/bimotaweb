@@ -26,7 +26,7 @@
             <td><%= link_to client.full_name, client_path(client) %></td>
             <td><%= client.format_rut %></td>
             <td><%= client.contact_phone %></td>
-            <td><%= client.vehicles ? client.vehicles.count : '0' %></td>
+            <td><%= client.vehicles.any? ? client.vehicles.count : "0 - #{link_to 'Ingrésale un vehículo', new_vehicle_path(client: client.id)}".html_safe %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
