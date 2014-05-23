@@ -54,6 +54,9 @@
           <li><%= link_to "Ordenes", orders_path %></li>
           <li><%= link_to "Vehículos", vehicles_path %></li>
           <li><%= link_to "Stock", supplies_path %></li>
+          <% if can? :manage, User %>
+            <li><%= link_to "Usuarios", users_path %></li>
+          <% end %>
         </ul>
         <ul class="nav pull-right">
           <% if current_user %>

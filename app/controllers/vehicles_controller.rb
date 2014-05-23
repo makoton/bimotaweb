@@ -47,10 +47,11 @@ class VehiclesController < ApplicationController
 
   def edit
     @vehicle = Vehicle.find(params[:id])
-    @page_title = "Editando #{@vehicle.full_name}"
+    if @vehicle.is_a?(BikeVehicle)
+      redirect_to edit_bike_vehicle_path(@vehicle)
+    else
+      redirect_to edit_car_vehicle_path(@vehicle)
+    end
   end
 
-  def update
-
-  end
 end
