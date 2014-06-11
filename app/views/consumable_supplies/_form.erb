@@ -1,0 +1,65 @@
+<%= form_for @consumable_supply, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+
+    <% if @consumable_supply.errors.any? %>
+      <div class="span12 alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+
+        <p>Hay <%= pluralize(@consumable_supply.errors.count, "error", "errores") %>
+          :
+        </p>
+        <ul>
+          <% @consumable_supply.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <%= f.label :brand, "Marca", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :brand, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la marca del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :model, "Modelo", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :model, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el modelo del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :price, "Precio", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :price, type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor (a cobrar) del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :category, "Categoría", class: "control-label" %>
+      <div class="controls">
+        <%= f.select :category, '' %>
+      </div>
+    </div>
+
+    <% unless is_edit %>
+      <div class="control-group">
+        <%= label_tag :units, 'Stock inicial', class: 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :units, 0, type: 'number', min: '0' %>
+          <p class="help-block">Opcional.</p>
+        </div>
+      </div>
+    <% end %>
+
+  </fieldset>
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="form-actions">
+        <%= f.submit "Guardar", :class => "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
