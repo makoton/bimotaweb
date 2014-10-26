@@ -6,3 +6,59 @@
     </div>
   </div>
 </div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <% if @part_supplies && @part_supplies.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Precio unitario</th>
+          <th>Categoría</th>
+          <th>Stock</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @part_supplies.each do |supply| %>
+          <tr>
+            <td><%= link_to supply.brand, part_supply_path(supply) %></td>
+            <td><%= supply.model %></td>
+            <td><%= number_to_currency(supply.price, separator: ',', delimiter: '.', format: "%u %n") %></td>
+            <td><%= supply.category %></td>
+            <td class="delete">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li>Agregar unidades</li>
+                  <li>
+                    <a href="<%= edit_part_supply_path(supply) %>"><i class="icon-edit"></i> Editar</a>
+                  </li>
+                  <li>
+                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), part_supply_path(supply), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este repuesto?" if can? :manage, PartSupply %>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no hay repuestos ingresados :(</h3>
+    <% end %>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span12">
+    <div class="text-center">
+      <%= paginate @part_supplies %>
+    </div>
+    <div class="pull-right">
+      <%= page_entries_info @part_supplies %>
+    </div>
+  </div>
+</div>

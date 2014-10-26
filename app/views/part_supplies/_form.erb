@@ -36,13 +36,30 @@
         <%= f.text_field :price, type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor (a cobrar) del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
-
-    <div class="control-group">
-      <%= f.label :category, "Categoría", class: "control-label" %>
-      <div class="controls">
-        <%= f.select :category, '' %>
+    <% if @categories.any? %>
+      <div class="control-group" id="category_select">
+        <%= f.label :category, "Categoría", class: "control-label" %>
+        <div class="controls">
+          <%= f.select :category, options_for_select(@categories.map { |cat| [cat.name, cat.name] }) %>
+          <span class="help-block"><a id="new_cat">Agrega aquí una nueva categoría</a></span>
+        </div>
       </div>
-    </div>
+      <div class="control-group" id="new_category" style="display: none;">
+        <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :new_category %>
+          <span class="help-block"><a id="back_to_select">Selecciona una categoría existente</a></span>
+        </div>
+      </div>
+    <% else %>
+      <div class="control-group">
+        <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :new_category %>
+        </div>
+      </div>
+    <% end %>
+
 
     <% unless is_edit %>
       <div class="control-group">
@@ -63,3 +80,15 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('#new_cat').on('click', function () {
+    $('#category_select').toggle();
+    $('#new_category').toggle();
+  });
+
+  $('#back_to_select').on('click', function(){
+    $('#category_select').toggle();
+    $('#new_category').toggle();
+  });
+</script>

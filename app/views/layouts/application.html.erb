@@ -64,7 +64,11 @@
           <% if can? :manage, User %>
             <li><%= link_to "Usuarios", users_path %></li>
           <% end %>
+          <% if can? :manage, Setting %>
+            <li><%= link_to 'Configuración', settings_path %></li>
+          <% end %>
         </ul>
+
         <ul class="nav pull-right">
           <% if current_user %>
             <li><%= link_to "<i class='icon-white icon-off'></i> Salir".html_safe, destroy_user_session_path, method: "delete" %></li>

@@ -13,4 +13,5 @@ Bimotaweb::Application.routes.draw do
   resources :vehicles
   resources :car_vehicles
   resources :bike_vehicles
+  resources :settings
 end

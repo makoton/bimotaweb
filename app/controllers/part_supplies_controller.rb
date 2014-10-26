@@ -3,16 +3,23 @@ class PartSuppliesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    @page_title = 'Repuestos'
     @part_supplies = PartSupply.page params[:page] #needs to have filters
   end
 
   def new
     @page_title = 'Nuevo Repuesto'
     @part = PartSupply.new
+    @categories = SupplyCategory.part_categories
   end
 
   def create
     @part = PartSupply.create(params[:part_supply])
+
+    if params[:new_category]
+      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_PART)
+      @part.category = new_category.name
+    end
 
     if @part.save
       flash[:success] = 'Repuesto creado'
@@ -40,6 +47,16 @@ class PartSuppliesController < ApplicationController
       flash[:error] = 'Ocurrio un error actualizando el registro, por favor intentalo de nuevo.'
       render :edit
     end
+  end
+
+  def destroy
+    @part = PartSupply.find params[:id]
+    if @part.destroy
+      flash[:success] = 'Se eliminó el repuesto.'
+    else
+      flash[:error] = 'Ocurrió un error eliminando el repuesto.'
+    end
+    redirect_to part_supplies_path
   end
 
   #Add units to stock

@@ -1,0 +1,21 @@
+
+
+<%= form_for @settings, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+
+    <% if @settings.errors.any? %>
+      <div class="span12 alert alert-error">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+
+        <p>Hay <%= pluralize(@settings.errors.count, "error", "errores") %>
+          :
+        </p>
+        <ul>
+          <% @settings.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </fieldset>
+<% end %>
