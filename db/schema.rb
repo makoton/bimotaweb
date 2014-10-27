@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141025234704) do
+ActiveRecord::Schema.define(:version => 20141026021924) do
 
   create_table "clients", :force => true do |t|
     t.string   "names"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20141025234704) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",      :default => 0
+    t.string   "name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
