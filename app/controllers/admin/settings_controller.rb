@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class SettingsController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::SettingsController < Admin::BaseController
 
   def index
     @page_title = 'Configuración'

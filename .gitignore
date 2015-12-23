@@ -20,3 +20,5 @@ doc/
 .DS_Store
 .idea
 .secret
+passenger.3000.pid
+passenger.3000.pid.lock

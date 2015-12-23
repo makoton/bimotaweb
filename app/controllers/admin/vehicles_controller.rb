@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class VehiclesController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::VehiclesController < Admin::BaseController
 
   def index
     @page_title = 'Vehículos'
@@ -16,11 +15,7 @@ class VehiclesController < ApplicationController
   end
 
   def create
-    if params[:type] == 'auto'
-      @vehicle = CarVehicle.new(params[:vehicle])
-    else
-      @vehicle = BikeVehicle.new(params[:vehicle])
-    end
+    @vehicle = BikeVehicle.new(params[:vehicle])
 
     unless params[:client].blank?
       @vehicle.client = Client.find params[:client]

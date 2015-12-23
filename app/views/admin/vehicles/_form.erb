@@ -57,13 +57,6 @@
         <%= f.text_field :kilometraje, type: 'number', min: '0' %>
       </div>
     </div>
-
-    <div class="control-group">
-      <%= label_tag :type, "Tipo", class: "control-label" %>
-      <div class="controls">
-          <%= select_tag :type, options_for_select([['Automóvil', 'auto'], ['Motocicleta', 'moto']]), include_blank: 'Selecciona', :required => 'required', :oninvalid => "this.setCustomValidity('Selecciona un tipo de vehículo.')", :onchange => "this.setCustomValidity('')" %>
-      </div>
-    </div>
     <%= hidden_field_tag :client, params[:client] %>
   </fieldset>
   <div class="row-fluid">

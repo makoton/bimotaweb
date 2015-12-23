@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class PartSuppliesController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::PartSuppliesController < Admin::BaseController
 
   def index
     @page_title = 'Repuestos'

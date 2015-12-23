@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class ClientsController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::ClientsController < Admin::BaseController
 
   def index
     @page_title = 'Clientes'
@@ -30,7 +29,7 @@ class ClientsController < ApplicationController
     @client = Client.find(params[:id])
     if @client.update_attributes(params[:client])
       flash[:success] = "Se modificó correctamente el cliente #{@client.short_name}"
-      redirect_to clients_path and return
+      redirect_to clients_path
     else
       render :edit
     end

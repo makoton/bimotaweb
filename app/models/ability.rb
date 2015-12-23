@@ -10,7 +10,7 @@ class Ability
     elsif user.role? :mechanic
       can :manage, [Order, Service]
     elsif user.role? :operator
-      can :manage, [Order, Client, Vehicle, CarVehicle, BikeVehicle]
+      can :manage, [Order, Client, Vehicle, BikeVehicle]
       can :read, [Supply, PartSupply, ConsumableSupply]
     end
   end

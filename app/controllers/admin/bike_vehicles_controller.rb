@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class BikeVehiclesController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::BikeVehiclesController < Admin::BaseController
 
   def edit
     @vehicle = BikeVehicle.find(params[:id])

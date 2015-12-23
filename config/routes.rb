@@ -5,13 +5,26 @@ Bimotaweb::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'home#index'
 
-  resources :clients
-  resources :users
-  resources :orders
-  resources :consumable_supplies
-  resources :part_supplies
-  resources :vehicles
-  resources :car_vehicles
-  resources :bike_vehicles
-  resources :settings
+  namespace :me do
+    root to: 'users#show'
+
+    resource :user
+    resources :orders
+    resources :vehicles
+    resources :bike_vehicles
+  end
+
+  namespace :admin do
+    root to: 'orders#index'
+
+    resources :clients
+    resources :users
+    resources :orders
+    resources :consumable_supplies
+    resources :part_supplies
+    resources :vehicles
+    resources :bike_vehicles
+    resources :settings
+  end
+
 end

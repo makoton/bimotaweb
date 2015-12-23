@@ -9,7 +9,6 @@ class Client < ActiveRecord::Base
   has_many :vehicles
   has_many :orders
   has_many :bikes, class_name: 'BikeVehicle'
-  has_many :cars, class_name: 'CarVehicle'
 
   #callbacks
   before_create :strip_rut

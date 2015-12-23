@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class UsersController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::UsersController < Admin::BaseController
 
   def index
     @page_title = 'Usuarios'

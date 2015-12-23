@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
-class ConsumableSuppliesController < ApplicationController
-  before_filter :authenticate_user!
+class Admin::ConsumableSuppliesController < Admin::BaseController
 
   def index
     @page_title = 'Insumos'
