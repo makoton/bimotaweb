@@ -4,7 +4,7 @@
   <fieldset>
 
     <% if @settings.errors.any? %>
-      <div class="span12 alert alert-error">
+      <div class="col-md-12 alert alert-error">
         <a class="close" data-dismiss="alert" href="#">×</a>
 
         <p>Hay <%= pluralize(@settings.errors.count, "error", "errores") %>

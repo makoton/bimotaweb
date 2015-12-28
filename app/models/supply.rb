@@ -2,7 +2,7 @@
 class Supply < ActiveRecord::Base
 
   #accessors
-  attr_accessible :brand, :model, :price, :category
+  # attr_accessible :brand, :model, :price, :category
 
   #relations
   has_many :supply_items

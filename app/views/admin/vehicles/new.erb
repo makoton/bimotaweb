@@ -1,13 +1,13 @@
-<div class="row-fluid">
-  <div class="span12 actions">
+<div class="row">
+  <div class="col-md-12 actions">
     <div class="page-header">
       <%= link_to 'Volver!', vehicles_path, :class => 'btn pull-right' %>
       <h2><%= @page_title %><%= " para #{@client.short_name}" if @client %></h2>
     </div>
   </div>
 </div>
-<div class="row-fluid">
-  <div class="span12">
+<div class="row">
+  <div class="col-md-12">
     <%= render 'form' %>
   </div>
 </div>

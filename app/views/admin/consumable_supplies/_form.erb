@@ -2,7 +2,7 @@
   <fieldset>
 
     <% if @consumable_supply.errors.any? %>
-      <div class="span12 alert alert-error">
+      <div class="col-md-12 alert alert-error">
         <a class="close" data-dismiss="alert" href="#">×</a>
 
         <p>Hay <%= pluralize(@consumable_supply.errors.count, "error", "errores") %>
@@ -72,8 +72,8 @@
     <% end %>
 
   </fieldset>
-  <div class="row-fluid">
-    <div class="span12">
+  <div class="row">
+    <div class="col-md-12">
       <div class="form-actions">
         <%= f.submit "Guardar", :class => "btn btn-primary" %>
       </div>

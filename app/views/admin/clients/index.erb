@@ -1,5 +1,5 @@
-<div class="row-fluid">
-  <div class="span12 actions">
+<div class="row">
+  <div class="col-md-12 actions">
     <div class="page-header">
       <%= link_to 'Registra un Cliente!', new_client_path, :class => 'btn btn-primary btn-large pull-right' %>
       <h2><%= @page_title %></h2>
@@ -7,8 +7,8 @@
   </div>
 </div>
 
-<div class="row-fluid">
-  <div class="span12">
+<div class="row">
+  <div class="col-md-12">
     <% if @clients && @clients.any? %>
       <table class="table table-striped">
         <thead>
@@ -51,8 +51,8 @@
   </div>
 </div>
 
-<div class="row-fluid">
-  <div class="span12">
+<div class="row">
+  <div class="col-md-12">
     <div class="text-center">
       <%= paginate @clients %>
     </div>

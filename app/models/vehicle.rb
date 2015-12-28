@@ -5,7 +5,7 @@ class Vehicle < ActiveRecord::Base
   belongs_to :client
 
   #accessors
-  attr_accessible :brand, :model, :year, :license_plate, :chassis_number, :kilometraje
+  # attr_accessible :brand, :model, :year, :license_plate, :chassis_number, :kilometraje
 
   #business methods
 

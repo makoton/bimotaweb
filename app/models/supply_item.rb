@@ -6,8 +6,8 @@ class SupplyItem < ActiveRecord::Base
   belongs_to :service
 
   #scopes
-  scope :available, where(status: STATUS_AVAILABLE)
-  scope :unavailable, where(status: STATUS_UNAVAILABLE)
+  scope :available, -> {where(status: STATUS_AVAILABLE)}
+  scope :unavailable, -> {where(status: STATUS_UNAVAILABLE)}
 
   scope :available_by_category, lambda {|cat| available.where(category: cat)}
 
