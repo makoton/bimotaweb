@@ -16,28 +16,28 @@
       </div>
     <% end %>
 
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label :brand, "Marca", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :brand, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la marca del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label :model, "Modelo", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :model, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el modelo del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
 
-    <div class="control-group">
+    <div class="form-group">
       <%= f.label :price, "Precio", class: "control-label" %>
       <div class="controls">
         <%= f.text_field :price, type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor (a cobrar) del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
     <% if @categories.any? %>
-      <div class="control-group" id="category_select">
+      <div class="form-group" id="category_select">
         <%= f.label :category, "Categoría", class: "control-label" %>
         <div class="controls">
           <%= f.select :category, options_for_select(@categories.map { |cat| [cat.name, cat.name] }) %>
@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="control-group" id="new_category" style="display: none;">
+      <div class="form-group" id="new_category" style="display: none;">
         <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
         <div class="controls">
           <%= text_field_tag :new_category %>
@@ -53,7 +53,7 @@
         </div>
       </div>
     <% else %>
-      <div class="control-group">
+      <div class="form-group">
         <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
         <div class="controls">
           <%= text_field_tag :new_category %>
@@ -62,7 +62,7 @@
     <% end %>
 
     <% unless is_edit %>
-      <div class="control-group">
+      <div class="form-group">
         <%= label_tag :units, 'Stock inicial', class: 'control-label' %>
         <div class="controls">
           <%= text_field_tag :units, 0, type: 'number', min: '0' %>

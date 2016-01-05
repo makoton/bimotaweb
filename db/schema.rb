@@ -9,141 +9,141 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141026021924) do
+ActiveRecord::Schema.define(version: 20160105225257) do
 
-  create_table "clients", :force => true do |t|
-    t.string   "names"
-    t.string   "last_names"
-    t.string   "rut"
-    t.string   "contact_phone"
-    t.string   "address"
-    t.string   "comments"
-    t.string   "email"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+  create_table "clients", force: :cascade do |t|
+    t.string   "names",         limit: 255
+    t.string   "last_names",    limit: 255
+    t.string   "rut",           limit: 255
+    t.string   "contact_phone", limit: 255
+    t.string   "address",       limit: 255
+    t.string   "comments",      limit: 255
+    t.string   "email",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  add_index "clients", ["rut"], :name => "index_clients_on_rut", :unique => true
+  add_index "clients", ["rut"], name: "index_clients_on_rut", unique: true, using: :btree
 
-  create_table "maintenances", :force => true do |t|
-    t.string  "kilometraje"
-    t.integer "base_price"
-    t.integer "labor_cost"
+  create_table "maintenances", force: :cascade do |t|
+    t.string  "kilometraje", limit: 255
+    t.integer "base_price",  limit: 4
+    t.integer "labor_cost",  limit: 4
   end
 
-  create_table "orders", :force => true do |t|
-    t.string  "current_state"
+  create_table "orders", force: :cascade do |t|
+    t.string  "current_state", limit: 255
     t.date    "finished_at"
-    t.integer "client_id"
-    t.integer "vehicle_id"
-    t.string  "uuid"
+    t.integer "client_id",     limit: 4
+    t.integer "vehicle_id",    limit: 4
+    t.string  "uuid",          limit: 255
   end
 
-  add_index "orders", ["uuid"], :name => "index_orders_on_uuid", :unique => true
+  add_index "orders", ["uuid"], name: "index_orders_on_uuid", unique: true, using: :btree
 
-  create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.integer "role_id", limit: 4
+    t.integer "user_id", limit: 4
   end
 
-  create_table "services", :force => true do |t|
-    t.integer  "order_id"
-    t.integer  "user_id"
-    t.string   "title"
-    t.string   "description"
-    t.integer  "labor_cost"
-    t.integer  "total_cost"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "services", force: :cascade do |t|
+    t.integer  "order_id",    limit: 4
+    t.integer  "user_id",     limit: 4
+    t.string   "title",       limit: 255
+    t.string   "description", limit: 255
+    t.integer  "labor_cost",  limit: 4
+    t.integer  "total_cost",  limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "settings", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "settings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "supplies", :force => true do |t|
-    t.string   "brand"
-    t.string   "model"
-    t.integer  "price"
-    t.string   "type"
-    t.string   "category"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "supplies", force: :cascade do |t|
+    t.string   "brand",      limit: 255
+    t.string   "model",      limit: 255
+    t.integer  "price",      limit: 4
+    t.string   "type",       limit: 255
+    t.string   "category",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  add_index "supplies", ["category"], :name => "index_supplies_on_category"
-  add_index "supplies", ["model"], :name => "index_supplies_on_model"
+  add_index "supplies", ["category"], name: "index_supplies_on_category", using: :btree
+  add_index "supplies", ["model"], name: "index_supplies_on_model", using: :btree
 
-  create_table "supply_categories", :force => true do |t|
-    t.string   "name"
-    t.string   "supply_type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "supply_categories", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "supply_type", limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  create_table "supply_items", :force => true do |t|
-    t.integer  "supply_id"
-    t.string   "status"
-    t.integer  "service_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "supply_items", force: :cascade do |t|
+    t.integer  "supply_id",  limit: 4
+    t.string   "status",     limit: 255
+    t.integer  "service_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => ""
-    t.string   "reset_password_token"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: ""
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.string   "invitation_token"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "invitation_token",       limit: 255
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      :default => 0
-    t.string   "name"
+    t.integer  "invitation_limit",       limit: 4
+    t.integer  "invited_by_id",          limit: 4
+    t.string   "invited_by_type",        limit: 255
+    t.integer  "invitations_count",      limit: 4,   default: 0
+    t.string   "name",                   limit: 255
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token", :unique => true
-  add_index "users", ["invitations_count"], :name => "index_users_on_invitations_count"
-  add_index "users", ["invited_by_id"], :name => "index_users_on_invited_by_id"
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "vehicles", :force => true do |t|
-    t.string   "brand"
-    t.string   "model"
-    t.integer  "year"
-    t.string   "license_plate"
-    t.string   "chassis_number"
-    t.integer  "kilometraje"
-    t.string   "type"
-    t.integer  "client_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "vehicles", force: :cascade do |t|
+    t.string   "brand",          limit: 255
+    t.string   "model",          limit: 255
+    t.integer  "year",           limit: 4
+    t.string   "license_plate",  limit: 255
+    t.string   "chassis_number", limit: 255
+    t.integer  "kilometraje",    limit: 4
+    t.string   "type",           limit: 255
+    t.integer  "user_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
-  add_index "vehicles", ["brand"], :name => "index_vehicles_on_brand"
-  add_index "vehicles", ["client_id"], :name => "index_vehicles_on_client_id"
-  add_index "vehicles", ["license_plate"], :name => "index_vehicles_on_license_plate"
-  add_index "vehicles", ["model"], :name => "index_vehicles_on_model"
+  add_index "vehicles", ["brand"], name: "index_vehicles_on_brand", using: :btree
+  add_index "vehicles", ["license_plate"], name: "index_vehicles_on_license_plate", using: :btree
+  add_index "vehicles", ["model"], name: "index_vehicles_on_model", using: :btree
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree
 
 end

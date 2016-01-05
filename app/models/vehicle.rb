@@ -2,7 +2,7 @@
 class Vehicle < ActiveRecord::Base
 
   #relations
-  belongs_to :client
+  belongs_to :user
 
   #accessors
   # attr_accessible :brand, :model, :year, :license_plate, :chassis_number, :kilometraje

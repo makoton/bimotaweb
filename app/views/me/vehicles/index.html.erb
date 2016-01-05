@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>Mis Motos</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @vehicles.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+          <th>Patente</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @vehicles.each do |vehicle| %>
+          <tr>
+            <td><%= vehicle.brand.titleize %></td>
+            <td><%= vehicle.model %></td>
+            <td><%= vehicle.year %></td>
+            <td><%= vehicle.license_plate %></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="drop-vehicle-actions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Acciones
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_me_bike_vehicle_path(vehicle) %></li>
+                  <li><%= link_to '<i class="fa fa-trash"></i> Eliminar'.html_safe, me_bike_vehicle_path(vehicle), method: :delete %></li>
+                  <li><%= link_to 'Historial'.html_safe, history_me_bike_vehicle_path(vehicle) %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no has ingresado tu(s) Moto(s)</h3>
+      <h4>Ingresa tu primera moto <%= link_to 'Acá', new_me_vehicle_path %></h4>
+    <% end %>
+  </div>
+</div>
