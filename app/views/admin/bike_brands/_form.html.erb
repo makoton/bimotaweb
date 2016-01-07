@@ -9,8 +9,10 @@
           :
         </p>
         <ul>
-          <% @bike_brand.errors.messages.each do |attr, msg| %>
-            <li><%= msg.first %></li>
+          <% @bike_brand.errors.messages.each do |attr, msgs| %>
+            <% msgs.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
           <% end %>
         </ul>
       </div>
