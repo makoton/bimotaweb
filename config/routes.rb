@@ -9,8 +9,11 @@ Bimotaweb::Application.routes.draw do
 
     resource :user
     resources :orders
-    resources :vehicles
-    resources :bike_vehicles
+    resources :vehicles do
+      member do
+        get :history
+      end
+    end
   end
 
   namespace :admin do
@@ -23,6 +26,7 @@ Bimotaweb::Application.routes.draw do
     resources :part_supplies
     resources :vehicles
     resources :bike_vehicles
+    resources :bike_brands
     resources :settings
   end
   # The priority is based upon order of creation: first created -> highest priority.

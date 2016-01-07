@@ -2,6 +2,6 @@
 class Admin::BaseController < ApplicationController
 
   # Layout
-  layout 'home'
+  layout 'application'
 
 end

@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-md-12">
+    <%= link_to 'Ingresa una Moto', new_me_vehicle_path, :class => 'btn btn-primary pull-right' %>
     <h2>Mis Motos</h2>
   </div>
 </div>
@@ -20,7 +21,7 @@
         <tbody>
         <% @vehicles.each do |vehicle| %>
           <tr>
-            <td><%= vehicle.brand.titleize %></td>
+            <td><%= vehicle.bike_brand.name.titleize %></td>
             <td><%= vehicle.model %></td>
             <td><%= vehicle.year %></td>
             <td><%= vehicle.license_plate %></td>
@@ -31,11 +32,10 @@
                   <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_me_bike_vehicle_path(vehicle) %></li>
-                  <li><%= link_to '<i class="fa fa-trash"></i> Eliminar'.html_safe, me_bike_vehicle_path(vehicle), method: :delete %></li>
-                  <li><%= link_to 'Historial'.html_safe, history_me_bike_vehicle_path(vehicle) %></li>
+                  <li><%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_me_vehicle_path(vehicle) %></li>
+                  <li><%= link_to '<i class="fa fa-trash"></i> Eliminar'.html_safe, me_vehicle_path(vehicle), method: :delete %></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Separated link</a></li>
+                  <li><%= link_to '<i class="fa fa-history"></i> Historial'.html_safe, history_me_vehicle_path(vehicle) %></li>
                 </ul>
               </div>
             </td>

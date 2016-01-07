@@ -2,10 +2,10 @@
   <fieldset>
 
     <% if @vehicle.errors.any? %>
-      <div class="col-md-12 alert alert-error">
+      <div class="col-md-12 alert alert-danger">
         <a class="close" data-dismiss="alert" href="#">×</a>
 
-        <p>Hay <%= pluralize(@vehicle.errors.count, "error", "errores") %>
+        <p>Hay <%= pluralize(@vehicle.errors.count, 'error', 'errores') %>
           :
         </p>
         <ul>
@@ -17,42 +17,42 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :brand, "Marca", class: "control-label" %>
+      <%= f.label :brand, 'Marca', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :brand %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :model, "Modelo", class: "control-label" %>
+      <%= f.label :model, 'Modelo', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :model %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :year, "Año", class: "control-label" %>
+      <%= f.label :year, 'Año', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :year, type: 'number', min: '1900' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :license_plate, "Patente", class: "control-label" %>
+      <%= f.label :license_plate, 'Patente', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :license_plate, placeholder: 'AA000' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :chassis_number, "Número de chasis", class: "control-label" %>
+      <%= f.label :chassis_number, 'Número de chasis', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :chassis_number %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :kilometraje, "Kilometraje", class: "control-label" %>
+      <%= f.label :kilometraje, 'Kilometraje', class: 'control-label' %>
       <div class="controls">
         <%= f.text_field :kilometraje, type: 'number', min: '0' %>
       </div>
@@ -62,7 +62,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="form-actions">
-        <%= f.submit "Guardar", :class => "btn btn-primary" %>
+        <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
       </div>
     </div>
   </div>

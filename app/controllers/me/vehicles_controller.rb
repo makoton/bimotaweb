@@ -2,7 +2,7 @@
 class Me::VehiclesController < ApplicationController
 
   def index
-    @vehicles = current_user.bike_vehicles
+    @vehicles = current_user.bike_vehicles.includes(:bike_brand)
   end
 
   def history
@@ -23,7 +23,19 @@ class Me::VehiclesController < ApplicationController
   end
 
   def create
+    @vehicle = current_user.bike_vehicles.new(bike_params)
+    if @vehicle.save
+      flash[:success] = 'Tu moto fue agregada con éxito'
+      redirect_to me_vehicles_path
+    else
+      render :new
+    end
+  end
 
+  private
+
+  def bike_params
+    params.require(:bike_vehicle).permit(:bike_brand_id, :model, :year, :license_plate, :chassis_number, :kilometraje)
   end
 
 end

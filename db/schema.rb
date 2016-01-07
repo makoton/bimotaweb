@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105225257) do
+ActiveRecord::Schema.define(version: 20160106235212) do
+
+  create_table "bike_brands", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bike_brands", ["name"], name: "index_bike_brands_on_name", using: :btree
 
   create_table "clients", force: :cascade do |t|
     t.string   "names",         limit: 255
@@ -129,7 +137,6 @@ ActiveRecord::Schema.define(version: 20160105225257) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "vehicles", force: :cascade do |t|
-    t.string   "brand",          limit: 255
     t.string   "model",          limit: 255
     t.integer  "year",           limit: 4
     t.string   "license_plate",  limit: 255
@@ -139,9 +146,9 @@ ActiveRecord::Schema.define(version: 20160105225257) do
     t.integer  "user_id",        limit: 4
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "bike_brand_id",  limit: 4
   end
 
-  add_index "vehicles", ["brand"], name: "index_vehicles_on_brand", using: :btree
   add_index "vehicles", ["license_plate"], name: "index_vehicles_on_license_plate", using: :btree
   add_index "vehicles", ["model"], name: "index_vehicles_on_model", using: :btree
   add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree

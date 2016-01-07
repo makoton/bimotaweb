@@ -55,24 +55,28 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'Clientes', clients_path %></li>
-        <li><%= link_to 'Ordenes', orders_path %></li>
-        <li><%= link_to 'Vehículos', vehicles_path %></li>
-        <% if can? :manage, User %>
-          <li><%= link_to 'Usuarios', users_path %></li>
-        <% end %>
+        <li><%= link_to 'Usuarios', admin_users_path %></li>
+        <li><%= link_to 'Ordenes', admin_orders_path %></li>
+        <li><%= link_to 'Vehículos', admin_vehicles_path %></li>
         <% if can? :manage, Setting %>
-          <li><%= link_to 'Configuración', settings_path %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuración <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Marcas', admin_bike_brands_path %></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to 'Configuración', admin_settings_path %></li>
+            </ul>
+          </li>
         <% end %>
-      </ul>
 
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to 'Insumos', consumable_supplies_path %></li>
-          <li><%= link_to 'Repuestos', part_supplies_path %></li>
-        </ul>
-      </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stock <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Insumos', admin_consumable_supplies_path %></li>
+            <li><%= link_to 'Repuestos', admin_part_supplies_path %></li>
+          </ul>
+        </li>
+      </ul>
 
 
       <ul class="nav navbar-nav navbar-right">
@@ -90,7 +94,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <%= bootstrap_flash %>
       <%= yield %>
     </div>
   </div>

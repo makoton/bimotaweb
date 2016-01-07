@@ -1,0 +1,31 @@
+<%= form_for @bike_brand, url: admin_bike_brands_path, html: {class: 'form-horizontal'} do |f| %>
+  <fieldset>
+
+    <% if @bike_brand.errors.any? %>
+      <div class="col-md-12 alert alert-danger">
+        <a class="close" data-dismiss="alert" href="#">×</a>
+
+        <p>Hay <%= pluralize(@bike_brand.errors.count, 'error', 'errores') %>
+          :
+        </p>
+        <ul>
+          <% @bike_brand.errors.messages.each do |attr, msg| %>
+            <li><%= msg.first %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name, 'Marca', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :name, class: 'form-control', required: 'required' %>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

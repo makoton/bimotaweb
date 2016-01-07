@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to 'Ingresa una Marca de Moto', new_admin_bike_brand_path, :class => 'btn btn-primary pull-right' %>
+    <h2>Marcas de Motos</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @bike_brands.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Marca</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @bike_brands.each do |brand| %>
+          <tr>
+            <td><%= brand.name.titleize %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no has ingresado marcas, los usuarios no pueden seleccionar la marca de su moto</h3>
+    <% end %>
+  </div>
+</div>
