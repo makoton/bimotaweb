@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to 'Ingresa un Vehículo!', new_vehicle_path, :class => 'btn btn-primary btn-large pull-right' %>
+      <%= link_to 'Ingresa un Vehículo!', new_admin_vehicle_path, :class => 'btn btn-primary btn-large pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
@@ -23,20 +23,20 @@
         <tbody>
         <% @vehicles.each do |vehicle| %>
           <tr>
-            <td><%= link_to vehicle.brand, vehicle_path(vehicle) %></td>
+            <td><%= link_to vehicle.bike_brand.name, admin_vehicle_path(vehicle) %></td>
             <td><%= vehicle.model %></td>
             <td><%= vehicle.year %></td>
-            <td><%= vehicle.client ? vehicle.client.short_name : 'Sin Dueño' %></td>
+            <td><%= vehicle.user ? vehicle.user.name.titleize : 'Sin Dueño' %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<%= edit_vehicle_path(vehicle) %>"><i class="icon-edit"></i> Editar</a>
+                    <a href="<%= edit_admin_vehicle_path(vehicle) %>"><i class="icon-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to(raw('<i class="icon-trash"></i> Eliminar'), vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
+                    <%= link_to(raw('<i class="icon-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
                   </li>
                 </ul>
               </div>
@@ -57,7 +57,7 @@
       <%= paginate @vehicles %>
     </div>
     <div class="pull-right">
-      <%= page_entries_info @vehicles %>
+      <%= page_entries_info(@vehicles) if @vehicles.any? %>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
 Bimotaweb::Application.routes.draw do
   devise_for :users
-  # devise_for :users, :controllers => { :invitations => 'users/invitations' }
+  # devise_for :users, :controllers => { :invitations => 'admin/users/invitations' }
 
   root :to => 'home#index'
 
@@ -22,10 +22,16 @@ Bimotaweb::Application.routes.draw do
     resources :clients
     resources :users
     resources :orders
-    resources :consumable_supplies
+    resources :consumable_supplies do
+      collection do
+        get :add_units_modal
+      end
+      member do
+        post :add_units
+      end
+    end
     resources :part_supplies
     resources :vehicles
-    resources :bike_vehicles
     resources :bike_brands
     resources :settings
   end

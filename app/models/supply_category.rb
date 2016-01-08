@@ -8,4 +8,6 @@ class SupplyCategory < ActiveRecord::Base
   scope :consumable_categories, -> { where(supply_type: TYPE_CONSUMABLE) }
 
     # attr_accessible :name, :supply_type
+
+  #categorias para realizar filtros
 end

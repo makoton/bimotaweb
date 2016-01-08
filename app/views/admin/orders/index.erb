@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <% if @orders && @orders.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.uuid, admin_order_path(order) %></td>
+            <td><%= order.current_state %></td>
+            <td class="delete">
+              <div class="btn-group">
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to '<i class="fa fa-eye"></i> Ver más'.html_safe, admin_order_path(order) %>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no hay ordenes creadas :(</h3>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
+      <%= paginate @orders %>
+    </div>
+    <div class="pull-right">
+      <%= page_entries_info(@orders) if @orders.any? %>
+    </div>
+  </div>
+</div>

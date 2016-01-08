@@ -1,0 +1,27 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="units-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Agregar stock a <%= @supply.title %></h4>
+      </div>
+      <%= form_tag add_units_admin_consumable_supply_path(@supply), :class => 'form-horizontal' do %>
+      <div class="modal-body">
+        <div class="form-group">
+          <%= label_tag :units, 'Cantidad', class: 'col-md-2 control-label' %>
+          <div class="col-md-6">
+            <%= text_field_tag :units, 0, type: 'number', min: '1', class: 'form-control' %>
+            <p class="help-block">Se agregará este numero de unidades al stock actual de <%= @supply.supply_items.available.count %></p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <%= submit_tag 'Guardar', :class => 'btn btn-primary' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

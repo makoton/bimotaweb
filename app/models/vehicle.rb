@@ -11,6 +11,6 @@ class Vehicle < ActiveRecord::Base
   #business methods
 
   def full_name
-    "#{brand} #{model}"
+    "#{bike_brand.name} #{model}"
   end
 end

@@ -15,4 +15,6 @@ class SupplyItem < ActiveRecord::Base
   #constants
   STATUS_AVAILABLE = 'available'
   STATUS_UNAVAILABLE = 'unavailable'
+
+  #representa 'uno' del repuesto/insumo en el stock, la suma de estos deberia ser el total de stock de la wea con status
 end

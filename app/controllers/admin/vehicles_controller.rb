@@ -7,23 +7,16 @@ class Admin::VehiclesController < Admin::BaseController
   end
 
   def new
-    if params[:client]
-      @client = Client.find params[:client]
-    end
     @page_title = 'Nuevo Vehículo'
     @vehicle = Vehicle.new
   end
 
   def create
-    @vehicle = BikeVehicle.new(params[:vehicle])
-
-    unless params[:client].blank?
-      @vehicle.client = Client.find params[:client]
-    end
+    @vehicle = BikeVehicle.new(vehicle_params)
 
     if @vehicle.save
       flash[:success] = 'Vehículo guardado con éxito!'
-      redirect_to vehicle_path(@vehicle)
+      redirect_to admin_vehicle_path(@vehicle)
     end
   end
 
@@ -42,11 +35,20 @@ class Admin::VehiclesController < Admin::BaseController
 
   def edit
     @vehicle = Vehicle.find(params[:id])
-    if @vehicle.is_a?(BikeVehicle)
-      redirect_to edit_bike_vehicle_path(@vehicle)
-    else
-      redirect_to edit_car_vehicle_path(@vehicle)
+  end
+
+  def update
+    @vehicle = BikeVehicle.find(params[:id])
+    if @vehicle.update!(vehicle_params)
+      flash[:success] = 'Se modificó correctamente la motocicleta'
+      redirect_to admin_vehicle_path(@vehicle)
     end
+  end
+
+  private
+
+  def vehicle_params
+    params.require(:bike_vehicle).permit(:bike_brand_id, :model, :year, :license_plate, :chassis_number, :kilometraje)
   end
 
 end

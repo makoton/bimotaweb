@@ -16,9 +16,11 @@ class Supply < ActiveRecord::Base
 
   #add units to stock
   def add_units(qty)
-    qty.times do
+    qty.to_i.times do
       #create item
-      supply_items.create
+      item = supply_items.new
+      item.status = SupplyItem::STATUS_AVAILABLE
+      item.save
     end
   end
 end

@@ -1,4 +1,4 @@
-<%= form_for @vehicle, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for @vehicle, url: me_vehicles_path, html: {class: 'form-horizontal'} do |f| %>
   <fieldset>
 
     <% if @vehicle.errors.any? %>
@@ -17,53 +17,50 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :brand, 'Marca', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :brand %>
+      <%= f.label :brand, 'Marca', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.select :bike_brand_id, options_for_select(BikeBrand.all.map{|brand| [brand.name, brand.id]}, @vehicle.bike_brand_id), {include_blank: 'Selecciona'}, {class: 'select2-drop col-md-12', required: 'required'} %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :model, 'Modelo', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :model %>
+      <%= f.label :model, 'Modelo', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :model, class: 'form-control', required: 'required' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :year, 'Año', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :year, type: 'number', min: '1900' %>
+      <%= f.label :year, 'Año', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :year, type: 'number', min: '1900', class: 'form-control', required: 'required' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :license_plate, 'Patente', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :license_plate, placeholder: 'AA000' %>
+      <%= f.label :license_plate, 'Patente', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :license_plate, placeholder: 'AA000', class: 'form-control', required: 'required' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :chassis_number, 'Número de chasis', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :chassis_number %>
+      <%= f.label :chassis_number, 'Número de chasis', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :chassis_number, class: 'form-control', required: 'required' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :kilometraje, 'Kilometraje', class: 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :kilometraje, type: 'number', min: '0' %>
+      <%= f.label :kilometraje, 'Kilometraje', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :kilometraje, type: 'number', min: '0', class: 'form-control', required: 'required' %>
       </div>
     </div>
-    <%= hidden_field_tag :client, params[:client] %>
   </fieldset>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-actions">
-        <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
-      </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
