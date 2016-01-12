@@ -28,7 +28,7 @@
             <td><%= supply.model %></td>
             <td><%= number_to_currency(supply.price, separator: ',', delimiter: '.', format: '%u %n') %></td>
             <td><%= supply.category %></td>
-            <td><%= supply.category %></td>
+            <td><%= supply.supply_items.available.count %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>

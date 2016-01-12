@@ -29,14 +29,14 @@
             <td><%= vehicle.user ? vehicle.user.name.titleize : 'Sin Dueño' %></td>
             <td class="delete">
               <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<%= edit_admin_vehicle_path(vehicle) %>"><i class="icon-edit"></i> Editar</a>
+                    <a href="<%= edit_admin_vehicle_path(vehicle) %>"><i class="fa fa-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to(raw('<i class="icon-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
+                    <%= link_to(raw('<i class="fa fa-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
                   </li>
                 </ul>
               </div>

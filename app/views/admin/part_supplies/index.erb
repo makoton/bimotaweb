@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to 'Ingresa un Repuesto!', new_part_supply_path, :class => 'btn btn-primary btn-large pull-right' %>
+      <%= link_to 'Ingresa un Repuesto!', new_admin_part_supply_path, :class => 'btn btn-primary btn-large pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
@@ -18,26 +18,28 @@
           <th>Precio unitario</th>
           <th>Categoría</th>
           <th>Stock</th>
+          <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <% @part_supplies.each do |supply| %>
           <tr>
-            <td><%= link_to supply.brand, part_supply_path(supply) %></td>
+            <td><%= link_to supply.brand, admin_part_supply_path(supply) %></td>
             <td><%= supply.model %></td>
-            <td><%= number_to_currency(supply.price, separator: ',', delimiter: '.', format: "%u %n") %></td>
+            <td><%= number_to_currency(supply.price, separator: ',', delimiter: '.', format: '%u %n') %></td>
             <td><%= supply.category %></td>
+            <td><%= supply.supply_items.available.count %></td>
             <td class="delete">
               <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li>Agregar unidades</li>
+                  <li><%= link_to '<i class="fa fa-plus"></i> Agregar unidades'.html_safe, '#', class: 'add-units', data: {supply_id: supply.id} %></li>
                   <li>
-                    <a href="<%= edit_part_supply_path(supply) %>"><i class="icon-edit"></i> Editar</a>
+                    <a href="<%= edit_admin_part_supply_path(supply) %>"><i class="fa fa-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), part_supply_path(supply), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este repuesto?" if can? :manage, PartSupply %>
+                    <%= link_to raw('<i class="fa fa-trash"></i> Eliminar'), admin_part_supply_path(supply), :method => 'delete', :confirm => '¿Estás seguro que deseas eliminar este repuesto?' if can? :manage, PartSupply %>
                   </li>
                 </ul>
               </div>
@@ -58,7 +60,19 @@
       <%= paginate @part_supplies %>
     </div>
     <div class="pull-right">
-      <%= page_entries_info @part_supplies %>
+      <%= page_entries_info(@part_supplies) if @part_supplies.any? %>
     </div>
   </div>
 </div>
+
+<div id="add-units-modal"></div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.add-units').on('click', function(){
+      var supply_id = $(this).data('supply-id');
+      var url = '<%= add_units_modal_admin_part_supplies_path(format: 'js') %>?supply_id='+ supply_id;
+      $.getScript(url);
+    });
+  });
+</script>

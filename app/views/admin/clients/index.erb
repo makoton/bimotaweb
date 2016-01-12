@@ -29,14 +29,14 @@
             <td><%= client.vehicles.any? ? client.vehicles.count : "0 - #{link_to 'Ingrésale un vehículo', new_vehicle_path(client: client.id)}".html_safe %></td>
             <td class="delete">
               <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-cog"></i>
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<%= edit_client_path(client) %>"><i class="icon-edit"></i> Editar</a>
+                    <a href="<%= edit_client_path(client) %>"><i class="fa fa-edit"></i> Editar</a>
                   </li>
                   <li>
-                    <%= link_to raw('<i class="icon-trash"></i> Eliminar'), client_path(client), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
+                    <%= link_to raw('<i class="fa fa-trash"></i> Eliminar'), client_path(client), :method => 'delete', :confirm => "¿Estás seguro que deseas eliminar este cliente?" if can? :manage, Client %>
                   </li>
                 </ul>
               </div>

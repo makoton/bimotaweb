@@ -1,11 +1,11 @@
-<%= form_for @part, html: { class: 'form-horizontal' } do |f| %>
+<%= form_for @part, url: admin_part_supplies_path, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
 
     <% if @part.errors.any? %>
       <div class="col-md-12 alert alert-danger">
         <a class="close" data-dismiss="alert" href="#">×</a>
 
-        <p>Hay <%= pluralize(@part.errors.count, "error", "errores") %>
+        <p>Hay <%= pluralize(@part.errors.count, 'error', 'errores') %>
           :
         </p>
         <ul>
@@ -17,72 +17,71 @@
     <% end %>
 
     <div class="form-group">
-      <%= f.label :brand, "Marca", class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :brand, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la marca del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      <%= f.label :brand, 'Marca', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :brand, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la marca del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :model, "Modelo", class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :model, required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el modelo del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      <%= f.label :model, 'Modelo', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :model, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el modelo del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :price, "Precio", class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :price, type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor (a cobrar) del repuesto.')", :onchange => "this.setCustomValidity('')" %>
+      <%= f.label :price, 'Precio', class: 'col-md-2 control-label' %>
+      <div class="col-md-4">
+        <%= f.text_field :price, class: 'form-control', type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor (a cobrar) del repuesto.')", :onchange => "this.setCustomValidity('')" %>
       </div>
     </div>
+
     <% if @categories.any? %>
       <div class="form-group" id="category_select">
-        <%= f.label :category, "Categoría", class: "control-label" %>
-        <div class="controls">
-          <%= f.select :category, options_for_select(@categories.map { |cat| [cat.name, cat.name] }) %>
+        <%= f.label :category, 'Categoría', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.select :category, options_for_select(@categories.map { |cat| [cat.name, cat.name] }), {include_blank: 'Selecciona'}, {class: 'select2-drop col-md-12'} %>
           <span class="help-block"><a id="new_cat">Agrega aquí una nueva categoría</a></span>
         </div>
       </div>
+
       <div class="form-group" id="new_category" style="display: none;">
-        <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
-        <div class="controls">
-          <%= text_field_tag :new_category %>
+        <%= label_tag :new_category, 'Nueva Categoría', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= text_field_tag :new_category, '', class: 'form-control' %>
           <span class="help-block"><a id="back_to_select">Selecciona una categoría existente</a></span>
         </div>
       </div>
     <% else %>
       <div class="form-group">
-        <%= label_tag :new_category, "Nueva Categoría", class: "control-label" %>
-        <div class="controls">
-          <%= text_field_tag :new_category %>
+        <%= label_tag :new_category, 'Nueva Categoría', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= text_field_tag :new_category, '', class: 'form-control' %>
         </div>
       </div>
     <% end %>
 
-
     <% unless is_edit %>
       <div class="form-group">
-        <%= label_tag :units, 'Stock inicial', class: 'control-label' %>
-        <div class="controls">
-          <%= text_field_tag :units, 0, type: 'number', min: '0' %>
+        <%= label_tag :units, 'Stock inicial', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= text_field_tag :units, 0, type: 'number', min: '0', class: 'form-control' %>
           <p class="help-block">Opcional.</p>
         </div>
       </div>
     <% end %>
 
   </fieldset>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="form-actions">
-        <%= f.submit "Guardar", :class => "btn btn-primary" %>
-      </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
 
 <script type="text/javascript">
-  $('#new_cat').on('click', function () {
+  $('#new_cat').on('click', function(){
     $('#category_select').toggle();
     $('#new_category').toggle();
   });

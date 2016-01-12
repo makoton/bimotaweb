@@ -26,5 +26,6 @@ gem 'awesome_print'
 gem 'kaminari'
 gem 'devise-i18n'
 gem 'select2-rails'
+gem 'font-awesome-sass'
 
 ruby '2.2.1'

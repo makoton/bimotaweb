@@ -19,7 +19,6 @@ Bimotaweb::Application.routes.draw do
   namespace :admin do
     root to: 'orders#index'
 
-    resources :clients
     resources :users
     resources :orders
     resources :consumable_supplies do
@@ -30,7 +29,14 @@ Bimotaweb::Application.routes.draw do
         post :add_units
       end
     end
-    resources :part_supplies
+    resources :part_supplies do
+      collection do
+        get :add_units_modal
+      end
+      member do
+        post :add_units
+      end
+    end
     resources :vehicles
     resources :bike_brands
     resources :settings

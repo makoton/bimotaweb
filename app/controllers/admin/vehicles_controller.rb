@@ -3,7 +3,11 @@ class Admin::VehiclesController < Admin::BaseController
 
   def index
     @page_title = 'Vehículos'
-    @vehicles = Vehicle.order('created_at DESC').page params[:page]
+    if params[:owner_id].present?
+      @vehicles = Vehicle.where(user_id: params[:owner_id]).order('created_at DESC').page params[:page]
+    else
+      @vehicles = Vehicle.order('created_at DESC').page params[:page]
+    end
   end
 
   def new
