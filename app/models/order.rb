@@ -13,6 +13,8 @@ class Order < ActiveRecord::Base
   STATUS_INPROGRESS = 'inprogress'
   STATUS_FINISHED = 'finished'
 
+
+
   def self.select_status
     [['Nuevo', STATUS_NEW], ['En Progreso', STATUS_INPROGRESS], ['Finalizada', STATUS_FINISHED]]
   end
