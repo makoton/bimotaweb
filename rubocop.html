@@ -310,8 +310,8 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
     </div>
     <div class="information">
       <div class="infobox">
-        80 files inspected,
-        488 offenses detected
+        83 files inspected,
+        511 offenses detected
       </div>
     </div>
     <div id="offenses">
@@ -763,7 +763,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
       
       
       <div class="offense-box">
-        <div class="box-title"><h3>app/controllers/admin/orders_controller.rb - 4 offenses</h3></div>
+        <div class="box-title"><h3>app/controllers/admin/orders_controller.rb - 16 offenses</h3></div>
         <div class="offense-reports">
           
           <div class="report">
@@ -799,7 +799,135 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #8</span> –
+              <span class="location">Line #6</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Assignment Branch Condition size for index is too high. [45.76/15]</span>
+            </div>
+            
+            <pre><code>  <span class="highlight convention">def</span> index</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #6</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Cyclomatic complexity for index is too high. [8/6]</span>
+            </div>
+            
+            <pre><code>  <span class="highlight convention">def</span> index</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #6</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Method has too many lines. [28/10]</span>
+            </div>
+            
+            <pre><code>  <span class="highlight convention">def</span> index</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #6</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Perceived complexity for index is too high. [9/7]</span>
+            </div>
+            
+            <pre><code>  <span class="highlight convention">def</span> index</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #7</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Extra empty line detected at method body beginning.</span>
+            </div>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #13</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Line is too long. [91/80]</span>
+            </div>
+            
+            <pre><code>        show_orders = [Order::STATUS_INPROGRESS, Order::STATUS_NEW, Order::STATU<span class="highlight convention">S_FINISHED]</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #15</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Favor modifier <code>if</code> usage when having a single-line body. Another good alternative is the usage of control flow <code>&&</code>/<code>||</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">if</span> params[:status] == &#39;new&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #21</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Favor modifier <code>if</code> usage when having a single-line body. Another good alternative is the usage of control flow <code>&&</code>/<code>||</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">if</span> params[:status] == &#39;delivered&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #24</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Favor modifier <code>if</code> usage when having a single-line body. Another good alternative is the usage of control flow <code>&&</code>/<code>||</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">if</span> params[:status] == &#39;canceled&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #31</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Line is too long. [103/80]</span>
+            </div>
+            
+            <pre><code>      # This complex query should get the results by name no mather what spanish<span class="highlight convention"> character was entered.</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #32</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Line is too long. [365/80]</span>
+            </div>
+            
+            <pre><code>      conditions = [&quot;( REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(use<span class="highlight convention">rs.name),&#39;á&#39;, &#39;a&#39;),&#39;é&#39;, &#39;e&#39;),&#39;í&#39;, &#39;i&#39;),&#39;ó&#39;, &#39;o&#39;),&#39;ú&#39;, &#39;u&#39;),&#39;ñ&#39;, &#39;n&#39;)  LIKE ? OR LOWER(users.email) LIKE ? OR LOWER(orders.uuid) LIKE ?) AND current_state IN(&#39;new&#39;,&#39;inprogress&#39;,&#39;finished&#39;)&quot;, &quot;%#{params[:query].downcase}%&quot;, &quot;%#{params[:query].downcase}%&quot;, &quot;%#{params[:query].downcase}%&quot;]</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #45</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Extra empty line detected at method body beginning.</span>
+            </div>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #53</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Final newline missing.</span>
             </div>
@@ -1141,7 +1269,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
       
       
       <div class="offense-box">
-        <div class="box-title"><h3>app/controllers/admin/vehicle_orders_controller.rb - 6 offenses</h3></div>
+        <div class="box-title"><h3>app/controllers/admin/vehicle_orders_controller.rb - 5 offenses</h3></div>
         <div class="offense-reports">
           
           <div class="report">
@@ -1163,17 +1291,6 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
             </div>
             
             <pre><code>class <span class="highlight convention">Admin::VehicleOrdersController</span> &lt; Admin::BaseController</code></pre>
-            
-          </div>
-          
-          <div class="report">
-            <div class="meta">
-              <span class="location">Line #51</span> –
-              <span class="severity convention">convention:</span>
-              <span class="message">Line is too long. [116/80]</span>
-            </div>
-            
-            <pre><code>    params.require(:order).permit(:vehicle_id, :current_state, :year, :license_p<span class="highlight convention">late, :chassis_number, :kilometraje)</span></code></pre>
             
           </div>
           
@@ -1727,6 +1844,79 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
       
       
       <div class="offense-box">
+        <div class="box-title"><h3>app/helpers/orders_helper.rb - 6 offenses</h3></div>
+        <div class="offense-reports">
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #2</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Missing top-level module documentation comment.</span>
+            </div>
+            
+            <pre><code><span class="highlight convention">module</span> OrdersHelper</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #3</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Extra empty line detected at module body beginning.</span>
+            </div>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #6</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Indent <code>when</code> as deep as <code>case</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">when</span> &#39;new&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #8</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Indent <code>when</code> as deep as <code>case</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">when</span> &#39;inprogress&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #10</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Indent <code>when</code> as deep as <code>case</code>.</span>
+            </div>
+            
+            <pre><code>      <span class="highlight convention">when</span> &#39;finished&#39;</code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #16</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Final newline missing.</span>
+            </div>
+            
+            <pre><code>end<span class="highlight convention"></span></code></pre>
+            
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      
+      <div class="offense-box">
         <div class="box-title"><h3>app/models/ability.rb - 1 offense</h3></div>
         <div class="offense-reports">
           
@@ -1867,7 +2057,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
       
       
       <div class="offense-box">
-        <div class="box-title"><h3>app/models/order.rb - 9 offenses</h3></div>
+        <div class="box-title"><h3>app/models/order.rb - 14 offenses</h3></div>
         <div class="offense-reports">
           
           <div class="report">
@@ -1923,7 +2113,40 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
+              <span class="location">Line #12</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Freeze mutable objects assigned to constants.</span>
+            </div>
+            
+            <pre><code>  STATUS_NEW = <span class="highlight convention">&#39;new&#39;</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
               <span class="location">Line #13</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Freeze mutable objects assigned to constants.</span>
+            </div>
+            
+            <pre><code>  STATUS_INPROGRESS = <span class="highlight convention">&#39;inprogress&#39;</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #14</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Freeze mutable objects assigned to constants.</span>
+            </div>
+            
+            <pre><code>  STATUS_FINISHED = <span class="highlight convention">&#39;finished&#39;</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #16</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Extra blank line detected.</span>
             </div>
@@ -1933,6 +2156,26 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           <div class="report">
             <div class="meta">
               <span class="location">Line #17</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Extra blank line detected.</span>
+            </div>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #19</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Line is too long. [96/80]</span>
+            </div>
+            
+            <pre><code>    [[&#39;Nuevo&#39;, STATUS_NEW], [&#39;En Progreso&#39;, STATUS_INPROGRESS], [&#39;Finalizada&#39;, S<span class="highlight convention">TATUS_FINISHED]]</span></code></pre>
+            
+          </div>
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #29</span> –
               <span class="severity warning">warning:</span>
               <span class="message">Redundant use of <code>Object#to_s</code> in interpolation.</span>
             </div>
@@ -1943,7 +2186,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #17</span> –
+              <span class="location">Line #29</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [92/80]</span>
             </div>
@@ -1954,7 +2197,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #19</span> –
+              <span class="location">Line #31</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Final newline missing.</span>
             </div>
@@ -4253,7 +4496,47 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
       
       
       <div class="offense-box">
-        <div class="box-title"><h3>db/schema.rb - 165 offenses</h3></div>
+        <div class="box-title"><h3>db/migrate/20160115014353_change_client_id_from_orders.rb - 1 offense</h3></div>
+        <div class="offense-reports">
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #1</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Missing top-level class documentation comment.</span>
+            </div>
+            
+            <pre><code><span class="highlight convention">class</span> ChangeClientIdFromOrders &lt; ActiveRecord::Migration</code></pre>
+            
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      
+      <div class="offense-box">
+        <div class="box-title"><h3>db/migrate/20160115015041_changes_to_user_informations.rb - 1 offense</h3></div>
+        <div class="offense-reports">
+          
+          <div class="report">
+            <div class="meta">
+              <span class="location">Line #1</span> –
+              <span class="severity convention">convention:</span>
+              <span class="message">Missing top-level class documentation comment.</span>
+            </div>
+            
+            <pre><code><span class="highlight convention">class</span> ChangesToUserInformations &lt; ActiveRecord::Migration</code></pre>
+            
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      
+      <div class="offense-box">
+        <div class="box-title"><h3>db/schema.rb - 164 offenses</h3></div>
         <div class="offense-reports">
           
           <div class="report">
@@ -4296,7 +4579,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Separate every 3 digits in the integer portion of a number with underscores(_).</span>
             </div>
             
-            <pre><code>ActiveRecord::Schema.define(version: <span class="highlight convention">20160115000932</span>) do</code></pre>
+            <pre><code>ActiveRecord::Schema.define(version: <span class="highlight convention">20160115015041</span>) do</code></pre>
             
           </div>
           
@@ -4492,7 +4775,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.integer <span class="highlight convention">&quot;client_id&quot;</span>,     limit: 4</code></pre>
+            <pre><code>    t.integer <span class="highlight convention">&quot;user_id&quot;</span>,       limit: 4</code></pre>
             
           </div>
           
@@ -5097,7 +5380,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;names&quot;</span>,         limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;name&quot;</span>,          limit: 255</code></pre>
             
           </div>
           
@@ -5108,7 +5391,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;last_names&quot;</span>,    limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;rut&quot;</span>,           limit: 255</code></pre>
             
           </div>
           
@@ -5119,7 +5402,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;rut&quot;</span>,           limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;contact_phone&quot;</span>, limit: 255</code></pre>
             
           </div>
           
@@ -5130,7 +5413,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;contact_phone&quot;</span>, limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;address&quot;</span>,       limit: 255</code></pre>
             
           </div>
           
@@ -5141,7 +5424,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;address&quot;</span>,       limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;comments&quot;</span>,      limit: 255</code></pre>
             
           </div>
           
@@ -5152,7 +5435,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;comments&quot;</span>,      limit: 255</code></pre>
+            <pre><code>    t.string   <span class="highlight convention">&quot;email&quot;</span>,         limit: 255</code></pre>
             
           </div>
           
@@ -5163,7 +5446,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.string   <span class="highlight convention">&quot;email&quot;</span>,         limit: 255</code></pre>
+            <pre><code>    t.datetime <span class="highlight convention">&quot;created_at&quot;</span>,                null: false</code></pre>
             
           </div>
           
@@ -5174,7 +5457,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.datetime <span class="highlight convention">&quot;created_at&quot;</span>,                null: false</code></pre>
+            <pre><code>    t.datetime <span class="highlight convention">&quot;updated_at&quot;</span>,                null: false</code></pre>
             
           </div>
           
@@ -5185,24 +5468,13 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
             
-            <pre><code>    t.datetime <span class="highlight convention">&quot;updated_at&quot;</span>,                null: false</code></pre>
-            
-          </div>
-          
-          <div class="report">
-            <div class="meta">
-              <span class="location">Line #105</span> –
-              <span class="severity convention">convention:</span>
-              <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
-            </div>
-            
             <pre><code>    t.integer  <span class="highlight convention">&quot;user_id&quot;</span>,       limit: 4</code></pre>
             
           </div>
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #105</span> –
+              <span class="location">Line #104</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5213,7 +5485,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #108</span> –
+              <span class="location">Line #107</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5224,7 +5496,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #108</span> –
+              <span class="location">Line #107</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5235,7 +5507,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #108</span> –
+              <span class="location">Line #107</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5246,7 +5518,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #108</span> –
+              <span class="location">Line #107</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [109/80]</span>
             </div>
@@ -5257,7 +5529,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #110</span> –
+              <span class="location">Line #109</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5268,7 +5540,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #111</span> –
+              <span class="location">Line #110</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5279,7 +5551,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #111</span> –
+              <span class="location">Line #110</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5290,7 +5562,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #112</span> –
+              <span class="location">Line #111</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5301,7 +5573,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #112</span> –
+              <span class="location">Line #111</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5312,7 +5584,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #113</span> –
+              <span class="location">Line #112</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5323,7 +5595,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #114</span> –
+              <span class="location">Line #113</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5334,7 +5606,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #115</span> –
+              <span class="location">Line #114</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5345,7 +5617,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #116</span> –
+              <span class="location">Line #115</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5356,7 +5628,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #116</span> –
+              <span class="location">Line #115</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5367,7 +5639,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #116</span> –
+              <span class="location">Line #115</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5378,7 +5650,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #116</span> –
+              <span class="location">Line #115</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5389,7 +5661,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #117</span> –
+              <span class="location">Line #116</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5400,7 +5672,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #118</span> –
+              <span class="location">Line #117</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5411,7 +5683,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #119</span> –
+              <span class="location">Line #118</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5422,7 +5694,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #120</span> –
+              <span class="location">Line #119</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5433,7 +5705,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #121</span> –
+              <span class="location">Line #120</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5444,7 +5716,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #122</span> –
+              <span class="location">Line #121</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5455,7 +5727,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #123</span> –
+              <span class="location">Line #122</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5466,7 +5738,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #123</span> –
+              <span class="location">Line #122</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5477,7 +5749,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #124</span> –
+              <span class="location">Line #123</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5488,7 +5760,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #125</span> –
+              <span class="location">Line #124</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5499,7 +5771,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #126</span> –
+              <span class="location">Line #125</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5510,7 +5782,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #127</span> –
+              <span class="location">Line #126</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5521,7 +5793,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #128</span> –
+              <span class="location">Line #127</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5532,7 +5804,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #129</span> –
+              <span class="location">Line #128</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5543,7 +5815,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #130</span> –
+              <span class="location">Line #129</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5554,7 +5826,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #130</span> –
+              <span class="location">Line #129</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5565,7 +5837,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #131</span> –
+              <span class="location">Line #130</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5576,7 +5848,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #134</span> –
+              <span class="location">Line #133</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5587,7 +5859,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #134</span> –
+              <span class="location">Line #133</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5598,7 +5870,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #134</span> –
+              <span class="location">Line #133</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5609,7 +5881,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #134</span> –
+              <span class="location">Line #133</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [89/80]</span>
             </div>
@@ -5620,7 +5892,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #135</span> –
+              <span class="location">Line #134</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5631,7 +5903,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #135</span> –
+              <span class="location">Line #134</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5642,7 +5914,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #135</span> –
+              <span class="location">Line #134</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5653,7 +5925,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #135</span> –
+              <span class="location">Line #134</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [111/80]</span>
             </div>
@@ -5664,7 +5936,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #136</span> –
+              <span class="location">Line #135</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5675,7 +5947,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #136</span> –
+              <span class="location">Line #135</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5686,7 +5958,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #136</span> –
+              <span class="location">Line #135</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5697,7 +5969,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #136</span> –
+              <span class="location">Line #135</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [99/80]</span>
             </div>
@@ -5708,7 +5980,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #137</span> –
+              <span class="location">Line #136</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5719,7 +5991,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #137</span> –
+              <span class="location">Line #136</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5730,7 +6002,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #137</span> –
+              <span class="location">Line #136</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5741,7 +6013,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #137</span> –
+              <span class="location">Line #136</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [91/80]</span>
             </div>
@@ -5752,7 +6024,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #138</span> –
+              <span class="location">Line #137</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5763,7 +6035,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #138</span> –
+              <span class="location">Line #137</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5774,7 +6046,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #138</span> –
+              <span class="location">Line #137</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5785,7 +6057,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #138</span> –
+              <span class="location">Line #137</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [119/80]</span>
             </div>
@@ -5796,7 +6068,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #140</span> –
+              <span class="location">Line #139</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5807,7 +6079,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #141</span> –
+              <span class="location">Line #140</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5818,7 +6090,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #142</span> –
+              <span class="location">Line #141</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5829,7 +6101,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #143</span> –
+              <span class="location">Line #142</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5840,7 +6112,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #144</span> –
+              <span class="location">Line #143</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5851,7 +6123,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #145</span> –
+              <span class="location">Line #144</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5862,7 +6134,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #146</span> –
+              <span class="location">Line #145</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5873,7 +6145,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #147</span> –
+              <span class="location">Line #146</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5884,7 +6156,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #148</span> –
+              <span class="location">Line #147</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5895,7 +6167,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #149</span> –
+              <span class="location">Line #148</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5906,7 +6178,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #150</span> –
+              <span class="location">Line #149</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5917,7 +6189,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #150</span> –
+              <span class="location">Line #149</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Unnecessary spacing detected.</span>
             </div>
@@ -5928,7 +6200,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #153</span> –
+              <span class="location">Line #152</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5939,7 +6211,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #153</span> –
+              <span class="location">Line #152</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5950,7 +6222,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #153</span> –
+              <span class="location">Line #152</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5961,7 +6233,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #153</span> –
+              <span class="location">Line #152</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [97/80]</span>
             </div>
@@ -5972,7 +6244,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #154</span> –
+              <span class="location">Line #153</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5983,7 +6255,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #154</span> –
+              <span class="location">Line #153</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -5994,7 +6266,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #154</span> –
+              <span class="location">Line #153</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -6005,7 +6277,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #154</span> –
+              <span class="location">Line #153</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [81/80]</span>
             </div>
@@ -6016,7 +6288,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #155</span> –
+              <span class="location">Line #154</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -6027,7 +6299,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #155</span> –
+              <span class="location">Line #154</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -6038,7 +6310,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #155</span> –
+              <span class="location">Line #154</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Prefer single-quoted strings when you don't need string interpolation or special symbols.</span>
             </div>
@@ -6049,7 +6321,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #155</span> –
+              <span class="location">Line #154</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Line is too long. [85/80]</span>
             </div>
@@ -6060,7 +6332,7 @@ TvFXMeuCkZPcaEBLqvgPBhCuiZo8+sAAAAAASUVORK5CYII=
           
           <div class="report">
             <div class="meta">
-              <span class="location">Line #156</span> –
+              <span class="location">Line #155</span> –
               <span class="severity convention">convention:</span>
               <span class="message">Extra empty line detected at block body end.</span>
             </div>

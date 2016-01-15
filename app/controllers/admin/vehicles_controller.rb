@@ -7,6 +7,11 @@ class Admin::VehiclesController < Admin::BaseController
     @page_title = 'Vehículos'
     if params[:owner_id].present?
       @vehicles = Vehicle.where(user_id: params[:owner_id]).order('created_at DESC').page params[:page]
+    elsif params[:query]
+        # This complex query should get the results by name no mather what spanish character was entered.
+      conditions = ["( REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(vehicles.model),'á', 'a'),'é', 'e'),'í', 'i'),'ó', 'o'),'ú', 'u'),'ñ', 'n')  LIKE ? OR LOWER(vehicles.license_plate) LIKE ? OR LOWER(vehicles.chassis_number) LIKE ? OR LOWER(bike_brands.name) ", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%"]
+
+        @vehicles = Vehicle.joins(:bike_brands).where(conditions).page params[:page]
     else
       @vehicles = Vehicle.order('created_at DESC').page params[:page]
     end

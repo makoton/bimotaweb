@@ -8,48 +8,63 @@
 </div>
 
 <div class="row">
+  <div class="col-md-4">
+    <div class="margin-b">
+      <%= form_tag({:action => 'index'}, :method => 'get') do %>
+          <div class="input-group">
+            <%= text_field_tag 'query', '', :placeholder => 'Buscar...', :class => 'form-control' %>
+            <span class="input-group-btn">
+            <%= button_tag raw('<i class="fa fa-search"></i>'), :class => 'btn btn-default', :disable_with => '<i class="fa fa-search"></i>' %>
+          </span>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-12">
     <% if @vehicles && @vehicles.any? %>
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Marca</th>
-          <th>Modelo</th>
-          <th>Año</th>
-          <th>Nombre Cliente</th>
-          <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% @vehicles.each do |vehicle| %>
+        <table class="table table-striped">
+          <thead>
           <tr>
-            <td><%= link_to vehicle.bike_brand.name, admin_vehicle_path(vehicle) %></td>
-            <td><%= vehicle.model %></td>
-            <td><%= vehicle.year %></td>
-            <td><%= vehicle.user ? vehicle.user.name.titleize : 'Sin Dueño' %></td>
-            <td class="delete">
-              <div class="btn-group">
-                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
-                  <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_vehicle_path(vehicle) %>
-                  </li>
-                  <li>
-                    <%= link_to(raw('<i class="fa fa-file-text-o"></i> Ordenes'), admin_vehicle_orders_path(vehicle)) %>
-                  </li>
-                  <li>
-                    <%= link_to(raw('<i class="fa fa-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
-                  </li>
-                </ul>
-              </div>
-            </td>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Nombre Cliente</th>
+            <th>Acciones</th>
           </tr>
-        <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+          <% @vehicles.each do |vehicle| %>
+              <tr>
+                <td><%= link_to vehicle.bike_brand.name, admin_vehicle_path(vehicle) %></td>
+                <td><%= vehicle.model %></td>
+                <td><%= vehicle.year %></td>
+                <td><%= vehicle.user ? vehicle.user.name.titleize : 'Sin Dueño' %></td>
+                <td class="delete">
+                  <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
+                      <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_vehicle_path(vehicle) %>
+                      </li>
+                      <li>
+                        <%= link_to(raw('<i class="fa fa-file-text-o"></i> Ordenes'), admin_vehicle_orders_path(vehicle)) %>
+                      </li>
+                      <li>
+                        <%= link_to(raw('<i class="fa fa-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
     <% else %>
-      <h3>Aún no hay vehículos ingresados :(</h3>
+        <h3>Aún no hay vehículos ingresados :(</h3>
     <% end %>
   </div>
 </div>

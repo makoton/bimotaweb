@@ -3,7 +3,24 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @page_title = 'Usuarios'
-    @users = User.page params[:page]
+
+
+    if params[:query]
+      # This complex query should get the results by name no mather what spanish character was entered.
+      conditions = ["REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(users.name),'á', 'a'),'é', 'e'),'í', 'i'),'ó', 'o'),'ú', 'u'),'ñ', 'n')  LIKE ? OR LOWER(users.email)", "%#{params[:query].downcase}%"]
+
+      @users = User.where(conditions).page params[:page]
+    elsif params[:status] && params[:status] == 'admin'
+      @users = User.where(role: 'admin').page params[:page]
+    elsif params[:status] && params[:status] == 'mechanic'
+      @users = User.where(role: 'mechanic').page params[:page]
+    elsif params[:status] && params[:status] == 'operator'
+      @users = User.where(role: 'operator').page params[:page]
+    elsif params[:status] && params[:status] == 'client'
+      @users = User.where(role: nil).page params[:page]
+    else
+      @users = User.page params[:page]
+    end
   end
 
   def invite
