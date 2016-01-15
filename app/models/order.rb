@@ -17,6 +17,10 @@ class Order < ActiveRecord::Base
     [['Nuevo', STATUS_NEW], ['En Progreso', STATUS_INPROGRESS], ['Finalizada', STATUS_FINISHED]]
   end
 
+  def self.count_by_status(status)
+    where(current_state: status).count
+  end
+
   private
 
   def generate_uuid
