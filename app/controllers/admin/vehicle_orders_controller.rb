@@ -4,7 +4,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name}"
-    @orders = @vehicle.orders
+    @orders = @vehicle.orders.page params[:page]
   end
 
   def new
@@ -48,7 +48,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   private
 
   def order_params
-    params.require(:order).permit(:vehicle_id, :current_state, :year, :license_plate, :chassis_number, :kilometraje)
+    params.require(:order).permit(:vehicle_id, :current_state)
   end
 
   def load_vehicle

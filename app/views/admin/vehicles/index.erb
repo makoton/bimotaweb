@@ -33,7 +33,10 @@
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="<%= edit_admin_vehicle_path(vehicle) %>"><i class="fa fa-edit"></i> Editar</a>
+                    <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_vehicle_path(vehicle) %>
+                  </li>
+                  <li>
+                    <%= link_to(raw('<i class="fa fa-file-text-o"></i> Ordenes'), admin_vehicle_orders_path(vehicle)) %>
                   </li>
                   <li>
                     <%= link_to(raw('<i class="fa fa-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>

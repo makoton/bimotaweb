@@ -9,7 +9,13 @@ class Order < ActiveRecord::Base
 
 
   #constants
+  STATUS_NEW = 'new'
+  STATUS_INPROGRESS = 'inprogress'
+  STATUS_FINISHED = 'finished'
 
+  def self.select_status
+    [['Nuevo', STATUS_NEW], ['En Progreso', STATUS_INPROGRESS], ['Finalizada', STATUS_FINISHED]]
+  end
 
   private
 
