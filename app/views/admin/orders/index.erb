@@ -52,6 +52,7 @@
           <thead>
           <tr>
             <th>ID</th>
+            <th>Cliente</th>
             <th>Estado</th>
             <th>Acciones</th>
           </tr>
@@ -60,6 +61,7 @@
           <% @orders.each do |order| %>
               <tr>
                 <td><%= link_to order.uuid, admin_order_path(order) %></td>
+                <td><%= order.user.name%></td>
                 <td><%= order.current_state %></td>
                 <td class="delete">
                   <div class="btn-group">
