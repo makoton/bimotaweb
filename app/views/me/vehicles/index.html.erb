@@ -35,7 +35,7 @@
                   <li><%= link_to '<i class="fa fa-pencil"></i> Editar'.html_safe, edit_me_vehicle_path(vehicle) %></li>
                   <li><%= link_to '<i class="fa fa-trash"></i> Eliminar'.html_safe, me_vehicle_path(vehicle), method: :delete %></li>
                   <li role="separator" class="divider"></li>
-                  <li><%= link_to '<i class="fa fa-history"></i> Historial'.html_safe, history_me_vehicle_path(vehicle) %></li>
+                  <li><%= link_to '<i class="fa fa-history"></i> Historial'.html_safe, me_vehicle_orders_path(vehicle) %></li>
                 </ul>
               </div>
             </td>

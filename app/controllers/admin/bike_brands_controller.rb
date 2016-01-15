@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Admin::BikeBrandsController < Admin::BaseController
 
+  before_filter :load_brand, only: [:edit, :update]
+
   def index
     @bike_brands = BikeBrand.all
   end
@@ -21,12 +23,10 @@ class Admin::BikeBrandsController < Admin::BaseController
   end
 
   def edit
-    @bike_brand = BikeBrand.find(params[:id])
+
   end
 
   def update
-    @bike_brand = BikeBrand.find(params[:id])
-
     if @bike_brand.update!(brand_params)
       flash[:success] = "La marca #{@bike_brand.name.titleize} ha sido actualizada"
       redirect_to admin_bike_brands_path
@@ -39,5 +39,9 @@ class Admin::BikeBrandsController < Admin::BaseController
 
   def brand_params
     params.require(:bike_brand).permit(:name)
+  end
+
+  def load_brand
+    @bike_brand = BikeBrand.find(params[:id])
   end
 end

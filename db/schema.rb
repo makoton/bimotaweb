@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106235212) do
+ActiveRecord::Schema.define(version: 20160115000932) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -20,20 +20,6 @@ ActiveRecord::Schema.define(version: 20160106235212) do
   end
 
   add_index "bike_brands", ["name"], name: "index_bike_brands_on_name", using: :btree
-
-  create_table "clients", force: :cascade do |t|
-    t.string   "names",         limit: 255
-    t.string   "last_names",    limit: 255
-    t.string   "rut",           limit: 255
-    t.string   "contact_phone", limit: 255
-    t.string   "address",       limit: 255
-    t.string   "comments",      limit: 255
-    t.string   "email",         limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "clients", ["rut"], name: "index_clients_on_rut", unique: true, using: :btree
 
   create_table "maintenances", force: :cascade do |t|
     t.string  "kilometraje", limit: 255
@@ -105,6 +91,21 @@ ActiveRecord::Schema.define(version: 20160106235212) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "user_informations", force: :cascade do |t|
+    t.string   "names",         limit: 255
+    t.string   "last_names",    limit: 255
+    t.string   "rut",           limit: 255
+    t.string   "contact_phone", limit: 255
+    t.string   "address",       limit: 255
+    t.string   "comments",      limit: 255
+    t.string   "email",         limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "user_id",       limit: 4
+  end
+
+  add_index "user_informations", ["rut"], name: "index_user_informations_on_rut", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

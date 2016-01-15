@@ -5,10 +5,6 @@ class Me::VehiclesController < ApplicationController
     @vehicles = current_user.bike_vehicles.includes(:bike_brand)
   end
 
-  def history
-
-  end
-
   def edit
     @vehicle = current_user.bike_vehicles.find(params[:id])
   end

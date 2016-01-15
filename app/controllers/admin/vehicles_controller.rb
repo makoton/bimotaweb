@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehiclesController < Admin::BaseController
 
+  before_filter :load_vehicle, except: [:index, :new, :create]
+
   def index
     @page_title = 'Vehículos'
     if params[:owner_id].present?
@@ -16,8 +18,6 @@ class Admin::VehiclesController < Admin::BaseController
   end
 
   def create
-    @vehicle = BikeVehicle.new(vehicle_params)
-
     if @vehicle.save
       flash[:success] = 'Vehículo guardado con éxito!'
       redirect_to admin_vehicle_path(@vehicle)
@@ -25,12 +25,10 @@ class Admin::VehiclesController < Admin::BaseController
   end
 
   def show
-    @vehicle = Vehicle.find(params[:id])
     @page_title = @vehicle.full_name
   end
 
   def destroy
-    @vehicle = Vehicle.find(params[:id])
     @vehicle.destroy
 
     flash[:info] = 'El vehículo fue eliminado.'
@@ -38,11 +36,10 @@ class Admin::VehiclesController < Admin::BaseController
   end
 
   def edit
-    @vehicle = Vehicle.find(params[:id])
+
   end
 
   def update
-    @vehicle = BikeVehicle.find(params[:id])
     if @vehicle.update!(vehicle_params)
       flash[:success] = 'Se modificó correctamente la motocicleta'
       redirect_to admin_vehicle_path(@vehicle)
@@ -53,6 +50,10 @@ class Admin::VehiclesController < Admin::BaseController
 
   def vehicle_params
     params.require(:bike_vehicle).permit(:bike_brand_id, :model, :year, :license_plate, :chassis_number, :kilometraje)
+  end
+
+  def load_vehicle
+    @vehicle = BikeVehicle.find(params[:id])
   end
 
 end

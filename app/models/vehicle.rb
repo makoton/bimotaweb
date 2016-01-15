@@ -4,6 +4,7 @@ class Vehicle < ActiveRecord::Base
   #relations
   belongs_to :user
   belongs_to :bike_brand
+  has_many :orders
 
   #accessors
   # attr_accessible :brand, :model, :year, :license_plate, :chassis_number, :kilometraje

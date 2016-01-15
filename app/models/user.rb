@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :bike_vehicles
   has_many :orders
+  has_one :user_information
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

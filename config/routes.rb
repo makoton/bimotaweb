@@ -10,9 +10,7 @@ Bimotaweb::Application.routes.draw do
     resource :user
     resources :orders
     resources :vehicles do
-      member do
-        get :history
-      end
+      resources :orders, controller: 'vehicle_orders'
     end
   end
 
@@ -37,7 +35,9 @@ Bimotaweb::Application.routes.draw do
         post :add_units
       end
     end
-    resources :vehicles
+    resources :vehicles do
+      resources :orders, controller: 'vehicle_orders'
+    end
     resources :bike_brands
     resources :settings
   end

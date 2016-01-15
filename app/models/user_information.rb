@@ -1,14 +1,8 @@
 # -*- encoding : utf-8 -*-
-class Client < ActiveRecord::Base
-
-  #accessors
-  # attr_accessible :names, :last_names, :rut, :address, :contact_phone, :comments, :email
-  #scopes
+class UserInformation < ActiveRecord::Base
 
   #relations
-  has_many :vehicles
-  has_many :orders
-  has_many :bikes, class_name: 'BikeVehicle'
+  belongs_to :user
 
   #callbacks
   before_create :strip_rut
