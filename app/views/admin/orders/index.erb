@@ -22,11 +22,10 @@
       <div class="dropdown">
 
         <%
-          str = ''
+          str = 'Todos' if (params[:status].present? && params[:status] == 'all') || params[:status].blank? || params[:query]
           str = raw("Nuevos (#{@total_new_orders || 0})") if params[:status].present? && params[:status] == 'new'
           str = raw("En progreso (#{@total_inprogress_orders || 0})") if params[:status].present? && params[:status] == 'inprogress'
           str = raw("Finalizados (#{@total_finished_orders || 0})") if params[:status].present? && params[:status] == 'finished'
-          str = 'Todos' if (params[:status].present? && params[:status] == 'all') || params[:query]
         %>
 
         <button class="btn btn-default" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
@@ -34,10 +33,10 @@
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+          <li class="<%= 'active' if (params[:status].present? && params[:status] == 'all') || params[:query] %>"><%= link_to 'Todos', :status => 'all' %></li>
           <li class="<%= 'active' if params[:status].present? && params[:status] == 'new' %>"><%= link_to raw("Nuevos (#{@total_new_orders || 0})"), :status => 'new' %></li>
           <li class="<%= 'active' if params[:status].present? && params[:status] == 'inprogress' %>"><%= link_to raw("En progreso (#{@total_inprogress_orders || 0})"), :status => 'inprogress' %></li>
           <li class="<%= 'active' if params[:status].present? && params[:status] == 'finished' %>"><%= link_to raw("Finalizados (#{@total_finished_orders || 0})"), :status => 'finished' %></li>
-          <li class="<%= 'active' if (params[:status].present? && params[:status] == 'all') || params[:query] %>"><%= link_to 'Todos', :status => 'all' %></li>
         </ul>
       </div>
 
