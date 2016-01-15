@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115015041) do
+ActiveRecord::Schema.define(version: 20160115033253) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -36,17 +36,6 @@ ActiveRecord::Schema.define(version: 20160115015041) do
   end
 
   add_index "orders", ["uuid"], name: "index_orders_on_uuid", unique: true, using: :btree
-
-  create_table "roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "roles_users", id: false, force: :cascade do |t|
-    t.integer "role_id", limit: 4
-    t.integer "user_id", limit: 4
-  end
 
   create_table "services", force: :cascade do |t|
     t.integer  "order_id",    limit: 4
@@ -128,6 +117,7 @@ ActiveRecord::Schema.define(version: 20160115015041) do
     t.string   "invited_by_type",        limit: 255
     t.integer  "invitations_count",      limit: 4,   default: 0
     t.string   "name",                   limit: 255
+    t.string   "role",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

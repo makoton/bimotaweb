@@ -4,7 +4,6 @@ class Admin::OrdersController < Admin::BaseController
   before_filter :load_order, except: :index
 
   def index
-
     @page_title = 'Ordenes'
 
     if params[:status]
@@ -43,6 +42,10 @@ class Admin::OrdersController < Admin::BaseController
 
   def show
 
+  end
+
+  def new
+    
   end
 
   private

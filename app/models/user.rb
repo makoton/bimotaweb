@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_one :user_information
 
+  ROLES = %w[admin mechanic operator]
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation, :remember_me
 
   def role?(role)
-    !!self.roles.find_by_name(role.to_s)
+    self.role == role.to_s
   end
 
   
