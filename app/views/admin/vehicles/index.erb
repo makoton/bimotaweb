@@ -54,7 +54,7 @@
                     <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_vehicle_path(vehicle) %>
                   </li>
                   <li>
-                    <%= link_to(raw('<i class="fa fa-trash"></i> Desvincular'), dissociate_user_admin_vehicle_path(vehicle), data: {confirm: '¿Estás seguro que deseas desvincular el vehículo de este usuario?'}) if can? :manage, Vehicle %>
+                    <%= link_to(raw('<i class="fa fa-user-times"></i> Desvincular'), dissociate_user_admin_vehicle_path(vehicle), data: {confirm: '¿Estás seguro que deseas desvincular el vehículo de este usuario?'}) if can? :manage, Vehicle %>
                   </li>
                   <li>
                     <%= link_to(raw('<i class="fa fa-trash"></i> Eliminar'), admin_vehicle_path(vehicle), :method => 'delete', data: {confirm: '¿Estás seguro que deseas eliminar este vehículo?'}) if can? :manage, Vehicle %>

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
+      <%= link_to 'Crear Orden', new_admin_vehicle_order_path(@vehicle), :class => 'btn btn-primary btn-large pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
@@ -21,7 +22,7 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= link_to order.uuid, admin_order_path(order) %></td>
-            <td><%= order.current_state %></td>
+            <td><%= status_for order.current_state %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>
@@ -38,7 +39,7 @@
         </tbody>
       </table>
     <% else %>
-      <h3>Aún no hay ordenes creadas :(</h3>
+      <h3>Aún no hay ordenes creadas para este vehículo</h3>
     <% end %>
   </div>
 </div>

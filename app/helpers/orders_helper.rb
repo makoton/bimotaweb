@@ -4,11 +4,11 @@ module OrdersHelper
   def status_for(order)
     case order.current_state
       when 'new'
-        'Nuevo'
+        '<span class="label label-primary">Nuevo</span>'.html_safe
       when 'inprogress'
-        'En Progreso'
+        '<span class="label label-warning">En Progreso</span>'.html_safe
       when 'finished'
-        'Finalizado'
+        '<span class="label label-success">Finalizado</span>'.html_safe
       else
         'Nuevo*'
     end

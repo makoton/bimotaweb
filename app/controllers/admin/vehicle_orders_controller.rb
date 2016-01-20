@@ -3,22 +3,18 @@ class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
 
   def index
-    @page_title = "Ordenes para #{@vehicle.full_name}"
+    @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
     @orders = @vehicle.orders.page params[:page]
   end
 
   def new
     @page_title = 'Nuevo Vehículo'
     @order = @vehicle.orders.new
-  end
+    @order.created_by = current_user.name
+    @order.user = @vehicle.user ? @vehicle.user : nil
+    @order.save
 
-  def create
-    @order = @vehicle.orders.new(order_params)
-
-    if @order.save
-      flash[:success] = 'Orden guardada con éxito!'
-      redirect_to admin_vehicle_order_path(@vehicle, @order)
-    end
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
   end
 
   def show
@@ -48,7 +44,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   private
 
   def order_params
-    params.require(:order).permit(:vehicle_id, :current_state)
+    params.require(:order).permit(:vehicle_id, :user_id, :created_by)
   end
 
   def load_vehicle

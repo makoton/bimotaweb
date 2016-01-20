@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120012612) do
+ActiveRecord::Schema.define(version: 20160120022506) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160120012612) do
     t.datetime "started_at"
     t.string   "finished_by",   limit: 255
     t.datetime "finished_at"
+    t.text     "comments",      limit: 65535
   end
 
   add_index "orders", ["uuid"], name: "index_orders_on_uuid", unique: true, using: :btree
@@ -80,7 +81,7 @@ ActiveRecord::Schema.define(version: 20160120012612) do
   create_table "supply_items", force: :cascade do |t|
     t.integer  "supply_id",  limit: 4
     t.string   "status",     limit: 255
-    t.integer  "service_id", limit: 4
+    t.integer  "task_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
