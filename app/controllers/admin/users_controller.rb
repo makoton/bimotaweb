@@ -7,7 +7,7 @@ class Admin::UsersController < Admin::BaseController
 
     if params[:query]
       # This complex query should get the results by name no mather what spanish character was entered.
-      conditions = ["REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(users.name),'á', 'a'),'é', 'e'),'í', 'i'),'ó', 'o'),'ú', 'u'),'ñ', 'n')  LIKE ? OR LOWER(users.email)", "%#{params[:query].downcase}%"]
+      conditions = ["REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER(users.name),'á', 'a'),'é', 'e'),'í', 'i'),'ó', 'o'),'ú', 'u'),'ñ', 'n')  LIKE ? OR LOWER(users.email) LIKE ?", "%#{params[:query].downcase}%", "%#{params[:query].downcase}%"]
 
       @users = User.where(conditions).page params[:page]
     elsif params[:status] && params[:status] == 'admin'

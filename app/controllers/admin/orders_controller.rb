@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::OrdersController < Admin::BaseController
 
-  before_filter :load_order, except: :index
+  before_filter :load_order, except: [:index, :new, :create]
 
   def index
     @page_title = 'Ordenes'
@@ -45,7 +45,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def new
-    
+    @page_title = 'Nueva Orden'
   end
 
   private

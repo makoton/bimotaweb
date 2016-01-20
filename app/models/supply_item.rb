@@ -3,7 +3,7 @@ class SupplyItem < ActiveRecord::Base
 
   #relations
   belongs_to :supply
-  belongs_to :service
+  # belongs_to :service
 
   #scopes
   scope :available, -> {where(status: STATUS_AVAILABLE)}

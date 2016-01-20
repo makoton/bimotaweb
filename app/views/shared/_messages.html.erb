@@ -1,22 +1,22 @@
 <% unless flash[:error].blank? %>
-  <div class="alert alert-danger">
+  <div class="alert alert-danger text-center" id="alert-fade">
     <%= flash[:error] %>
   </div>
 <% end %>
 <% unless flash[:success].blank? %>
-  <div class="alert alert-success">
+  <div class="alert alert-success text-center" id="alert-fade">
 
     <%= flash[:success] %>
   </div>
 <% end %>
 <% unless flash[:info].blank? %>
-  <div class="alert alert-info">
+  <div class="alert alert-info text-center" id="alert-fade">
 
     <%= flash[:info] %>
   </div>
 <% end %>
 <% unless flash[:warning].blank? %>
-  <div class="alert alert-warning">
+  <div class="alert alert-warning text-center" id="alert-fade">
 
     <%= flash[:warning] %>
   </div>

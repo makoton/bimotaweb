@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   #relations
   belongs_to :user
   belongs_to :vehicle
+  has_many :tasks
 
   before_create :generate_uuid
 

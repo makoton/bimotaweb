@@ -20,4 +20,8 @@ $(document).ready(function () {
     $(".select2-drop").select2({
         theme: "bootstrap"
     });
+
+    $("#alert-fade").fadeTo(6000, 500).slideUp(500, function () {
+        $("#success-alert").alert('close');
+    });
 });

@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% if @user %>
+      <h3>Información del usuario seleccionado</h3>
+      <ul>
+        <li>Nombre: <%= @user.name %></li>
+        <li>Email: <%= @user.email %></li>
+        <li>RUT: <%= format_rut_for(@user) %></li>
+        <li>Nº de contacto: <%= @user.user_information ? @user.user_information.contact_phone : 'N/D' %></li>
+        <li>Dirección: <%= @user.user_information ? @user.user_information.address : 'N/D' %></li>
+      </ul>
+
+      <%= form_tag assign_admin_vehicle_path(@vehicle) do %>
+        <%= hidden_field_tag 'bike_vehicle[user_id]', @user.id %>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-4">
+            <%= submit_tag 'Confirmar', :class => 'btn btn-primary', data: {disable_with: 'Confirmando...'} %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h3>Inténtalo de nuevo.</h3>
+    <% end %>
+  </div>
+</div>

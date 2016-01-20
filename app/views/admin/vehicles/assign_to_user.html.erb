@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <%= link_to 'Volver!', admin_orders_path, :class => 'btn pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs nav-justified">
+      <li role="presentation" class="active">
+        <a href="#existing" aria-controls="existing" role="tab" data-toggle="tab">Usuario Existente</a></li>
+      <li role="presentation"><a href="#new" aria-controls="new" role="tab" data-toggle="tab">Nuevo Usuario</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="existing">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="margin-b">
+              <%= form_tag({:action => 'find_users'}, :method => 'get', remote: true) do %>
+                <div class="input-group">
+                  <%= text_field_tag 'query', '', :placeholder => 'Busca por Nombre o Email...', :class => 'form-control' %>
+                  <span class="input-group-btn">
+            <%= button_tag raw('<i class="fa fa-search"></i>'), :class => 'btn btn-default', :disable_with => '<i class="fa fa-search"></i>' %>
+          </span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div id="users-result"></div>
+          </div>
+          <div class="col-md-6">
+            <div id="selected-user"></div>
+          </div>
+        </div>
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="new">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <%= form_for @new_user, url: create_and_assign_user_admin_vehicle_path(@vehicle), html: { class: 'form-horizontal' } do |f| %>
+
+              <div class="form-group">
+                <%= f.label :name, 'Nombre', class: 'col-md-2 control-label' %>
+                <div class="col-md-4">
+                  <%= f.text_field :name, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el nombre del usuario.')", :onchange => "this.setCustomValidity('')" %>
+                </div>
+              </div>
+              <div class="form-group">
+                <%= f.label :email, 'Email', class: 'col-md-2 control-label' %>
+                <div class="col-md-4">
+                  <%= f.email_field :email, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el email del usuario.')", :onchange => "this.setCustomValidity('')" %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-md-offset-2 col-md-4">
+                  <%= f.submit 'Confirmar', :class => 'btn btn-primary' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

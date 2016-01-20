@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% if @users && @users.any? %>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Mail</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td class="center">
+              <%= radio_button_tag(:user_id, user.id, false, class: 'user-radio') %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>No se encontraron resultados</h3>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('.user-radio').change(function () {
+    if ($(this).is(':checked')) {
+      var selected_user_id = $(this).val();
+      var url = '<%= fetch_selected_user_admin_vehicle_path(@vehicle) %>?user_id=' + selected_user_id;
+      $.getScript(url);
+    }
+  });
+</script>
