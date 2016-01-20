@@ -39,7 +39,7 @@ Bimotaweb::Application.routes.draw do
       resources :orders, controller: 'vehicle_orders'
       member do
         get :assign_to_user, :find_users, :fetch_selected_user, :dissociate_user
-        post :assign, :create_and_assign_user
+        post :assign, :create_and_assign_user, :add_comment
       end
     end
     resources :bike_brands

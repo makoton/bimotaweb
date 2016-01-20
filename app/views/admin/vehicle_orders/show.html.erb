@@ -1,3 +1,50 @@
 detalles basicos de la orden (info moto, usuario, acciones)
 - acciones de tasks (agregar(modal), eliminar(boton basura))
 - comentarios (orden)
+
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <%= link_to 'Volver', admin_vehicle_orders_path(@vehicle), :class => 'btn btn-default pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>Comentarios</h3>
+    <div id="comments">
+      <% if @order.comments.any? %>
+        <%= render partial: 'comments' %>
+      <% else %>
+        <h4>Aún no hay comentarios para esta orden</h4>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-default" id="comment-panel" style="display:none;">
+      <div class="panel-heading">
+        <h3 class="panel-title">Nuevo Comentario</h3>
+      </div>
+      <div class="panel-body">
+        <%= form_tag '' do %>
+        <% end %>
+      </div>
+    </div>
+    <a href="#" id="show-comment-panel" class="btn btn-default"><i class="fa fa-comment-o"></i> Comenta</a>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#show-comment-panel').on('click', function(){
+      $(this).hide();
+      $('#comment-panel').show();
+    });
+  });
+</script>

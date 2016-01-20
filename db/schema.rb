@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120022506) do
+ActiveRecord::Schema.define(version: 20160120190431) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20160120022506) do
   end
 
   add_index "bike_brands", ["name"], name: "index_bike_brands_on_name", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "order_id",   limit: 4
+    t.text     "content",    limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "maintenances", force: :cascade do |t|
     t.string  "kilometraje", limit: 255
@@ -37,7 +45,6 @@ ActiveRecord::Schema.define(version: 20160120022506) do
     t.datetime "started_at"
     t.string   "finished_by",   limit: 255
     t.datetime "finished_at"
-    t.text     "comments",      limit: 65535
   end
 
   add_index "orders", ["uuid"], name: "index_orders_on_uuid", unique: true, using: :btree

@@ -18,7 +18,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   end
 
   def show
-    @order = @vehicle.orders.find(params[:id])
+    @order = @vehicle.orders.includes(:comments).find(params[:id])
     @page_title = "Orden ##{@order.uuid}"
   end
 
@@ -41,10 +41,20 @@ class Admin::VehicleOrdersController < Admin::BaseController
     end
   end
 
+  def add_comment
+    @order = Order.find_by_uuid(params[:uuid])
+    @comment = @order.comments.new(comment_params)
+
+  end
+
   private
 
   def order_params
     params.require(:order).permit(:vehicle_id, :user_id, :created_by)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:order_id, :user_id, :content)
   end
 
   def load_vehicle

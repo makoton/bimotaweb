@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :vehicle
   has_many :tasks
+  has_many :comments
 
   before_create :generate_uuid
 
