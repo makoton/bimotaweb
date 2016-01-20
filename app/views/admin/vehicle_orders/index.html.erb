@@ -22,7 +22,7 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= link_to order.uuid, admin_order_path(order) %></td>
-            <td><%= status_for order.current_state %></td>
+            <td><%= status_for order %></td>
             <td class="delete">
               <div class="btn-group">
                 <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-cog"></i>

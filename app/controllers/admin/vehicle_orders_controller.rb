@@ -12,6 +12,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
     @order = @vehicle.orders.new
     @order.created_by = current_user.name
     @order.user = @vehicle.user ? @vehicle.user : nil
+    @order.current_state = Order::STATUS_NEW
     @order.save
 
     redirect_to admin_vehicle_order_path(@vehicle, @order)

@@ -80,6 +80,9 @@ class Admin::VehiclesController < Admin::BaseController
 
   def show
     @page_title = @vehicle.full_name
+    @vehicle = BikeVehicle.find(params[:id])
+    @orders = Order.where(vehicle_id: @vehicle.id)
+    @user = @vehicle.user
   end
 
   def destroy
