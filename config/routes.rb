@@ -7,7 +7,11 @@ Bimotaweb::Application.routes.draw do
   namespace :me do
     root to: 'users#show'
 
-    resource :user
+    resource :user do
+      member do
+        post :commit_user_information
+      end
+    end
     resources :orders
     resources :vehicles do
       resources :orders, controller: 'vehicle_orders'

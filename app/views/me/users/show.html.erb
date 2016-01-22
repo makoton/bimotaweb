@@ -1,1 +1,11 @@
 hola <%= current_user.name.titleize %>
+<%if current_user.user_information.id.blank?%>
+    <div class="row">
+      <div class="col-md-12">
+        <%= render 'form' %>
+      </div>
+    </div>
+<%else%>
+    teni datos
+<%end%>
+

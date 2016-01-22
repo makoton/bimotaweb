@@ -23,6 +23,18 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def show
+    @user = User.includes(:user_information).find(params[:id])
+    @vehicles = @user.bike_vehicles
+    unless @user
+      flash[:info] = 'Ocurrió un error accediendo a la información de ese usuario. Inténtalo de nuevo.'
+      redirect_to admin_users_path
+    end
+
+    @page_title = @user.name
+
+  end
+
   def invite
     unless can? :manage, User
       flash[:error] = 'No Autorizado >:('

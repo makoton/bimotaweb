@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
+//= require valida_rut
 //= require_tree .
 
 $(document).ready(function () {
