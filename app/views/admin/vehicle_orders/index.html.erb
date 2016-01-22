@@ -21,7 +21,7 @@
         <tbody>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= link_to order.uuid, admin_order_path(order) %></td>
+            <td><%= link_to order.uuid, admin_vehicle_order_path(@vehicle, order) %></td>
             <td><%= status_for order %></td>
             <td class="delete">
               <div class="btn-group">
@@ -29,7 +29,7 @@
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <%= link_to '<i class="fa fa-eye"></i> Ver más'.html_safe, admin_order_path(order) %>
+                    <%= link_to '<i class="fa fa-eye"></i> Ver más'.html_safe, admin_vehicle_order_path(@vehicle, order) %>
                   </li>
                 </ul>
               </div>
