@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to 'Volver!', admin_vehicles_path, :class => 'btn btn-default pull-right' %>
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_vehicles_path, :class => 'btn btn-default btn-lg pull-right' %>
       <h2><%= @page_title %><%= " para #{@client.short_name}" if @client %></h2>
     </div>
   </div>
@@ -10,63 +10,53 @@
   <div class="col-md-4">
     <div class="well">
       <h3>Detalle</h3>
-      <% begin %>
-          <% if @vehicle %>
-              <dl class="dl-vm">
-                <dt>Marca</dt>
-                <dd><%= @vehicle.bike_brand.name %></dd>
+      <dl class="dl-vm">
+        <dt>Marca</dt>
+        <dd><%= @vehicle.bike_brand.name %></dd>
 
-                <dt>Modelo</dt>
-                <dd><%= @vehicle.model %></dd>
+        <dt>Modelo</dt>
+        <dd><%= @vehicle.model %></dd>
 
-                <dt>Año</dt>
-                <dd><%= @vehicle.year %></dd>
+        <dt>Año</dt>
+        <dd><%= @vehicle.year %></dd>
 
-                <dt>Patente</dt>
-                <dd><%= @vehicle.license_plate %></dd>
+        <dt>Patente</dt>
+        <dd><%= @vehicle.license_plate %></dd>
 
-                <dt>Número de chasis</dt>
-                <dd><%= @vehicle.chassis_number %></dd>
+        <dt>Número de chasis</dt>
+        <dd><%= @vehicle.chassis_number %></dd>
 
-                <dt>Kilometraje</dt>
-                <dd><%= @vehicle.kilometraje %></dd>
-              </dl>
-          <% else %>
-              para eliminar vehiculo?
-          <% end %>
-      <% rescue %>
-          <div class="alert alert-danger">Error al cargar vehículo</div>
-      <% end %>
+        <dt>Kilometraje</dt>
+        <dd><%= @vehicle.kilometraje %></dd>
+      </dl>
     </div>
   </div>
 
   <div class="col-md-8">
-    <% if @vehicle %>
-        <% if @orders && @orders.any? %>
-            <h4>Lista ordenes vehìculo</h4>
-            <table class="table table-striped">
-              <thead>
-              <tr>
-                <th>ID</th>
-                <th>Cliente</th>
-                <th>Estado</th>
-              </tr>
-              </thead>
-              <tbody>
-              <% @orders.each do |order| %>
-                  <tr>
-                    <td><%= link_to order.uuid, admin_vehicle_order_path(@vehicle, order) %></td>
-                    <td><%= order.user.name%></td>
-                    <td><%= status_for(order) %></td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-        <% else %>
-            <h3>Aún no hay ordenes creadas :(</h3>
+    <% if @orders && @orders.any? %>
+      <h4>Lista ordenes vehìculo</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.uuid, admin_vehicle_order_path(@vehicle, order) %></td>
+            <td><%= order.user.name %></td>
+            <td><%= status_for(order) %></td>
+          </tr>
         <% end %>
-        </div>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no hay ordenes creadas :(</h3>
     <% end %>
-
   </div>
+
+</div>
 </div>

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :bike_vehicles
   has_many :orders
+  has_many :comments
   has_one :user_information
 
   ROLES = %w[admin mechanic operator]

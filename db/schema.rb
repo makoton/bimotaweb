@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120190431) do
+ActiveRecord::Schema.define(version: 20160121002018) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160120190431) do
     t.text     "observations", limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status",       limit: 255,   default: "pending"
   end
 
   create_table "user_informations", force: :cascade do |t|

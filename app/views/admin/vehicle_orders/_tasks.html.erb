@@ -1,0 +1,13 @@
+<h5>Trabajos pendientes</h5>
+<% if @order.tasks.pending.any? %>
+<% else %>
+  <span>No hay trabajos pendientes.</span>
+<% end %>
+
+<% if @order.tasks.any? %>
+  <h5>Trabajos finalizados</h5>
+  <% if @order.tasks.finished.any? %>
+  <% else %>
+    <span>No hay trabajos terminados aún.</span>
+  <% end %>
+<% end %>

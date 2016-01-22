@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to 'Volver!', admin_vehicles_path, :class => 'btn btn-default pull-right' %>
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_vehicles_path, :class => 'btn btn-default btn-lg pull-right' %>
       <h2><%= @page_title %><%= " para #{@client.short_name}" if @client %></h2>
     </div>
   </div>

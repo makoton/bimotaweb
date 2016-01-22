@@ -36,10 +36,15 @@ Bimotaweb::Application.routes.draw do
       end
     end
     resources :vehicles do
-      resources :orders, controller: 'vehicle_orders'
+      resources :orders, controller: 'vehicle_orders' do
+        member do
+          post :add_comment, :commit_new_task
+          get :new_task
+        end
+      end
       member do
         get :assign_to_user, :find_users, :fetch_selected_user, :dissociate_user
-        post :assign, :create_and_assign_user, :add_comment
+        post :assign, :create_and_assign_user
       end
     end
     resources :bike_brands

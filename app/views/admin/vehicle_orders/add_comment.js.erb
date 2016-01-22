@@ -1,0 +1,8 @@
+var html = '';
+<% if @order.comments.any? %>
+html = '<%= j render(partial: 'comments') %>';
+<% else %>
+html = '<h4>Aún no hay comentarios para esta orden</h4>';
+<% end %>
+
+$('#comments').html(html);

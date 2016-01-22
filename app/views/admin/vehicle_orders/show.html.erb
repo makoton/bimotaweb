@@ -1,21 +1,58 @@
-detalles basicos de la orden (info moto, usuario, acciones)
-- acciones de tasks (agregar(modal), eliminar(boton basura))
-- comentarios (orden)
-
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to 'Volver', admin_vehicle_orders_path(@vehicle), :class => 'btn btn-default pull-right' %>
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_vehicle_orders_path(@vehicle), :class => 'btn btn-default btn-lg pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-9">
+    <a href="#" id="new-task-btn" class="btn btn-primary pull-right">Agrega un trabajo</a>
+    <div class="col-md-12">
+      <div id="new-task" style="display: none;">
+      </div>
+    </div>
+    <h3>Detalle</h3>
+    <div id="tasks">
+      <% if @order.tasks.any? %>
+        <%= render partial: 'tasks' %>
+      <% else %>
+        <h4>Aún no hay trabajos ingresados</h4>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="well">
+      <h4>Información del vehículo</h4>
+      <dl class="dl-vm">
+        <dt>Marca</dt>
+        <dd><%= @vehicle.bike_brand.name %></dd>
+
+        <dt>Modelo</dt>
+        <dd><%= @vehicle.model %></dd>
+
+        <dt>Año</dt>
+        <dd><%= @vehicle.year %></dd>
+
+        <dt>Patente</dt>
+        <dd><%= @vehicle.license_plate %></dd>
+
+        <dt>Número de chasis</dt>
+        <dd><%= @vehicle.chassis_number %></dd>
+
+        <dt>Kilometraje</dt>
+        <dd><%= @vehicle.kilometraje %></dd>
+      </dl>
+    </div>
+  </div>
+</div>
 
 
 <div class="row">
-  <div class="col-md-12">
-    <h3>Comentarios</h3>
+  <div class="col-md-9">
+    <h4>Comentarios</h4>
     <div id="comments">
       <% if @order.comments.any? %>
         <%= render partial: 'comments' %>
@@ -32,7 +69,16 @@ detalles basicos de la orden (info moto, usuario, acciones)
         <h3 class="panel-title">Nuevo Comentario</h3>
       </div>
       <div class="panel-body">
-        <%= form_tag '' do %>
+        <%= form_tag add_comment_admin_vehicle_order_path(@vehicle, @order), remote: true, id: 'add-comment-form' do %>
+          <div class="form-group">
+            <%= text_area_tag 'comment[content]', '', size: '100x10', placeholder: 'Ingresa tu comentario...', class: 'form-control', required: 'required' %>
+          </div>
+          <div class="form-group">
+            <div class="text-right">
+              <a href="#" id="close-comment" class="btn btn-default">Cancelar</a>
+              <%= submit_tag 'Guardar', :class => 'btn btn-primary', id: 'submit-comment', data: {disable_with: 'Guardando...'} %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
@@ -41,10 +87,30 @@ detalles basicos de la orden (info moto, usuario, acciones)
 </div>
 
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('#show-comment-panel').on('click', function(){
+  $(document).ready(function () {
+    $('#show-comment-panel').on('click', function () {
       $(this).hide();
       $('#comment-panel').show();
+    });
+
+    $('#close-comment').on('click', function () {
+      commentClick();
+    });
+
+    $('#add-comment-form').bind('ajax:complete', function () {
+      commentClick();
+    });
+
+    function commentClick() {
+      $('#comment_content').val('');
+      $('#comment-panel').hide();
+      $('#show-comment-panel').show();
+    }
+
+    $('#new-task-btn').on('click', function(){
+
+      $('#new-task').slideToggle();
+      return false;
     });
   });
 </script>

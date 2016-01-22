@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
+  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task]
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
@@ -30,22 +31,25 @@ class Admin::VehicleOrdersController < Admin::BaseController
     redirect_to admin_vehicle_orders_path(@vehicle)
   end
 
-  def edit
-    @order = @vehicle.orders.find(params[:id])
-  end
-
-  def update
-    @order = @vehicle.orders.find(params[:id])
-    if @order.update!(order_params)
-      flash[:success] = 'Se modificó correctamente la orden'
-      redirect_to admin_vehicle_order_path(@vehicle, @order)
-    end
-  end
-
   def add_comment
-    @order = Order.find_by_uuid(params[:uuid])
     @comment = @order.comments.new(comment_params)
+    @comment.user = current_user
+    @comment.save
+    @order.reload
+    @comment.reload
+  end
 
+  def new_task
+    @task = @order.tasks.new
+  end
+
+  def commit_new_task
+    @task = @order.tasks.new(task_params)
+    if @task.save
+
+    else
+
+    end
   end
 
   private
@@ -58,8 +62,16 @@ class Admin::VehicleOrdersController < Admin::BaseController
     params.require(:comment).permit(:order_id, :user_id, :content)
   end
 
+  def task_params
+    params.require(:task).permit(:order_id, :user_id, :content)
+  end
+
   def load_vehicle
     @vehicle = BikeVehicle.includes(:orders, :user, :bike_brand).find(params[:vehicle_id])
+  end
+
+  def load_order
+    @order = @vehicle.orders.find(params[:id])
   end
 
 end
