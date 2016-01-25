@@ -11,7 +11,7 @@ class Supply < ActiveRecord::Base
   #business methods
 
   def title
-    "#{brand} #{model}"
+    "#{brand} - #{model}".titleize
   end
 
   #add units to stock
@@ -21,6 +21,22 @@ class Supply < ActiveRecord::Base
       item = supply_items.new
       item.status = SupplyItem::STATUS_AVAILABLE
       item.save
+    end
+  end
+
+  def self.with_stock(type)
+    ary_for_select = []
+    Supply.includes(:supply_items).where(type: type).each do |supply|
+      if supply.supply_items.available.any?
+        ary_for_select << [supply.title, supply.id]
+      end
+    end
+    ary_for_select
+  end
+
+  def assign_to_task(task, quantity)
+    quantity.to_i.times do
+      self.supply_items.available.last.use_on(task)
     end
   end
 end

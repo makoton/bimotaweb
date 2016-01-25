@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
-  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task]
+  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task, :delete_task, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task]
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
@@ -45,11 +45,59 @@ class Admin::VehicleOrdersController < Admin::BaseController
 
   def commit_new_task
     @task = @order.tasks.new(task_params)
-    if @task.save
+    @task.created_by = current_user.name
+    @result = @task.save
+  end
 
+  def add_consumable_supply
+    @task = @order.tasks.find(params[:task])
+    render partial: 'consumable_supply_form'
+  end
+
+  def add_part_supply
+    @task = @order.tasks.find(params[:task])
+    render partial: 'part_supply_form'
+  end
+
+  def commit_supply
+    task = @order.tasks.find(params[:task])
+    supply = Supply.find(params[:supply])
+    supply.assign_to_task(task, params[:quantity])
+    render 'commit_new_task'
+  end
+
+  def get_supply_stock
+    supply = Supply.find(params[:supply])
+    render text: supply.supply_items.available.count
+  end
+
+  def labor_cost_form
+    @task = @order.tasks.find(params[:task])
+    render partial: 'labor_form'
+  end
+
+  def commit_labor_cost
+    task = @order.tasks.find(params[:task])
+    task.labor_cost = params[:amount]
+    task.save
+    render 'commit_new_task'
+  end
+
+  def finish_task
+    task = @order.tasks.find(params[:task])
+    task.finish!
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
+  def delete_task
+    task = @order.tasks.find(params[:task_id])
+    if task.destroy
+      flash[:success] = 'Se eliminó el trabajo.'
     else
-
+      flash[:error] = 'Ocurrió un problema eliminando el trabajo, inténtalo de nuevo'
     end
+
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
   end
 
   private
@@ -63,7 +111,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   end
 
   def task_params
-    params.require(:task).permit(:order_id, :user_id, :content)
+    params.require(:task).permit(:order_id, :title, :created_by, :labor_cost, :price, :observations, :status)
   end
 
   def load_vehicle

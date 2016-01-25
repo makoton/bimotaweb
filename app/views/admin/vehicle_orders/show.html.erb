@@ -108,8 +108,8 @@
     }
 
     $('#new-task-btn').on('click', function(){
-
-      $('#new-task').slideToggle();
+      var url = '<%= new_task_admin_vehicle_order_path(@vehicle, @order) %>';
+      $.getScript(url);
       return false;
     });
   });

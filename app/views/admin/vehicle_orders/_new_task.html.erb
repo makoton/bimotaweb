@@ -1,4 +1,16 @@
 <div class="col-md-12">
-  <%= form_tag commit_new_task_admin_vehicle_order_path(@vehicle, @order) do %>
+  <%= form_tag commit_new_task_admin_vehicle_order_path(@vehicle, @order), remote: true, class: 'form-inline', id: 'new-task-form' do %>
+    <div class="form-group">
+      <%= label_tag 'task[title]', 'Tarea' %>
+      <%= text_field_tag 'task[title]', '', class: 'form-control' %>
+    </div>
+    <%= submit_tag 'Guardar', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  $('#new-task-form').on('submit', function(){
+    $('#new-task').slideToggle();
+    $('#new-task').html('');
+  });
+</script>

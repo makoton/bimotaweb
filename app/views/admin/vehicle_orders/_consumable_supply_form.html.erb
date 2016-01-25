@@ -1,0 +1,40 @@
+<%= form_tag commit_supply_admin_vehicle_order_path(@vehicle, @order), remote: true, class: 'form-horizontal', id: "frm-consumable-#{@task.id}" do %>
+  <%= hidden_field_tag 'task', @task.id %>
+  <div class="form-group">
+    <%= label_tag :supply, 'Insumo', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= select_tag 'supply', options_for_select(ConsumableSupply.with_stock('ConsumableSupply')), {include_blank: 'Selecciona', class: 'select2-drop col-md-12', id: "supply-#{@task.id}"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :quantity, 'Cantidad', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= text_field_tag :quantity, '', id: "quantity-#{@task.id}", class: 'form-control', type: 'number', min: '1', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la cantidad de insumos consumidos.')", :onchange => "this.setCustomValidity('')" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <a class="close-panel btn btn-default" href="#">Cancelar</a>
+      <%= submit_tag 'Guardar', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(".select2-drop").select2({
+    theme: "bootstrap"
+  });
+
+  $('#supply-<%= @task.id %>').on('change', function () {
+    url = '<%= get_supply_stock_admin_vehicle_order_path(@vehicle, @order) %>?supply=' + $(this).val();
+    $.get(url, function (data) {
+      $('#quantity-<%= @task.id %>').val('0');
+      $('#quantity-<%= @task.id %>').attr('max', data);
+    });
+  });
+
+  $('.close-panel').on('click', function () {
+    $(this).parent().parent().parent().parent().slideToggle();
+  });
+</script>

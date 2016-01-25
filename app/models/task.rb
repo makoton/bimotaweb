@@ -11,4 +11,11 @@ class Task < ActiveRecord::Base
   scope :pending, -> { where(status: STATUS_PENDING) }
   scope :finished, -> { where(status: STATUS_FINISHED) }
 
+  def finish!
+    self.update_attribute(:status, STATUS_FINISHED)
+  end
+
+  def pending!
+    self.update_attribute(:status, STATUS_PENDING)
+  end
 end

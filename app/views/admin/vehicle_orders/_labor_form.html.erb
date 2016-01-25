@@ -1,0 +1,20 @@
+<%= form_tag commit_labor_cost_admin_vehicle_order_path(@vehicle, @order, task: @task.id), class: 'form-horizontal', remote: true, id: "frm-labor-#{@task.id}" do %>
+  <div class="form-group">
+    <%= label_tag :amount, 'Monto mano de obra', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= text_field_tag :amount, '', id: "amount-#{@task.id}", class: 'form-control', type: 'number', min: '1', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el valor de la mano de obra.')", :onchange => "this.setCustomValidity('')" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <a class="close-panel btn btn-default" href="#">Cancelar</a>
+      <%= submit_tag 'Guardar', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $('.close-panel').on('click', function () {
+    $(this).parent().parent().parent().parent().slideToggle();
+  });
+</script>
