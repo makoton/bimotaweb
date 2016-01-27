@@ -13,4 +13,8 @@ module OrdersHelper
         'Nuevo*'
     end
   end
+
+  def money_for(amount)
+    number_to_currency(amount.to_i, unit: '$', delimiter: '.', format: '%u %n')
+  end
 end

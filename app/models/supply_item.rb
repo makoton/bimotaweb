@@ -18,6 +18,8 @@ class SupplyItem < ActiveRecord::Base
   def use_on(task)
     self.task = task
     self.status = STATUS_UNAVAILABLE
+    self.price_at_assignment = self.supply.price
     self.save
+    task.recalc!
   end
 end

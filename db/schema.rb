@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122020852) do
+ActiveRecord::Schema.define(version: 20160127021201) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 20160122020852) do
   create_table "supplies", force: :cascade do |t|
     t.string   "brand",      limit: 255
     t.string   "model",      limit: 255
-    t.integer  "price",      limit: 4
+    t.float    "price",      limit: 24,  default: 0.0
     t.string   "type",       limit: 255
     t.string   "category",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "supplies", ["category"], name: "index_supplies_on_category", using: :btree
@@ -86,18 +86,19 @@ ActiveRecord::Schema.define(version: 20160122020852) do
   end
 
   create_table "supply_items", force: :cascade do |t|
-    t.integer  "supply_id",  limit: 4
-    t.string   "status",     limit: 255
-    t.integer  "task_id",    limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "supply_id",           limit: 4
+    t.string   "status",              limit: 255
+    t.integer  "task_id",             limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.float    "price_at_assignment", limit: 24,  default: 0.0
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "created_by",   limit: 255
-    t.float    "labor_cost",   limit: 24
-    t.float    "price",        limit: 24
-    t.float    "total_amount", limit: 24
+    t.float    "labor_cost",   limit: 24,    default: 0.0
+    t.float    "price",        limit: 24,    default: 0.0
+    t.float    "total_amount", limit: 24,    default: 0.0
     t.integer  "order_id",     limit: 4
     t.string   "title",        limit: 255
     t.text     "observations", limit: 65535

@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
-  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task, :delete_task, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task]
+  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task, :delete_task, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task, :task_details]
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
@@ -80,6 +80,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
     task = @order.tasks.find(params[:task])
     task.labor_cost = params[:amount]
     task.save
+    task.recalc!
     render 'commit_new_task'
   end
 
@@ -87,6 +88,13 @@ class Admin::VehicleOrdersController < Admin::BaseController
     task = @order.tasks.find(params[:task])
     task.finish!
     redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
+  def task_details
+    @task = @order.tasks.find(params[:task])
+    @consumables = @task.supplies_by_type('ConsumableSupply')
+    @parts = @task.supplies_by_type('PartSupply')
+    render partial: 'task_detail'
   end
 
   def delete_task

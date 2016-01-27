@@ -24,7 +24,8 @@
           </div>
         </div>
         <div class="panel-footer">
-          <a href="#" class="task-details" data-task="<%= task.id %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+          <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+          <div class="details-panel" style="display: none;"></div>
         </div>
       </div>
     </div>
@@ -48,7 +49,8 @@
             </div>
           </div>
           <div class="panel-footer">
-            <a href="#" class="task-details" data-task="<%= task.id %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+            <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+            <div class="details-panel" style="display: none;"></div>
           </div>
         </div>
       </div>
@@ -69,6 +71,10 @@
     $el.parent().parent().find('.actions-panel').slideToggle();
   }
 
+  function toggleDetailsPanel($el){
+    $el.slideToggle();
+  }
+
   $('.action-btn').on('click', function () {
     var that = $(this);
     clearPanel(that);
@@ -77,5 +83,21 @@
       that.parent().parent().find('.actions-panel').html(data);
     });
     showActionPanel($(this));
+  });
+
+  $('.task-details').on('click', function () {
+    var that = $(this);
+    var panel = that.parent().find('.details-panel');
+
+    if(!panel.is(':hidden')){
+      toggleDetailsPanel(panel);
+      return false;
+    }
+
+    var url = that.data('task-url');
+    $.get(url, function (data) {
+      panel.html(data);
+      toggleDetailsPanel(panel);
+    });
   });
 </script>
