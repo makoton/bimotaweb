@@ -15,6 +15,6 @@ module OrdersHelper
   end
 
   def money_for(amount)
-    number_to_currency(amount.to_i, unit: '$', delimiter: '.', format: '%u %n')
+    number_to_currency(amount.to_i, unit: '$', delimiter: '.', format: '%u %n', precision: 0)
   end
 end
