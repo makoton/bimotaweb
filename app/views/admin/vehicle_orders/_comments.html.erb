@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <span class="comment-owner"><strong><%= comment.user.name.titleize %></strong>
         escribió el <%= comment.created_at.in_time_zone.strftime('%d-%m-%Y') %>
-        a las <%= comment.created_at.in_time_zone.strftime('%H:%M') %></span>
+        a las <%= comment.created_at.in_time_zone.strftime('%H:%M') %> <%= comment.task ? "sobre el trabajo <strong>#{comment.task.title}</strong>".html_safe : '' %></span>
       <p><%= comment.content.capitalize %></p>
     </div>
   </div>

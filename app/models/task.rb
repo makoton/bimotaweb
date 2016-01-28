@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   #relations
   belongs_to :order
   has_many :supply_items
+  has_many :comments
 
   STATUS_PENDING = 'pending'
   STATUS_FINISHED = 'finished'

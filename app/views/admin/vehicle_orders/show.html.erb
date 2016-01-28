@@ -71,6 +71,9 @@
       <div class="panel-body">
         <%= form_tag add_comment_admin_vehicle_order_path(@vehicle, @order), remote: true, id: 'add-comment-form' do %>
           <div class="form-group">
+            <%= select_tag 'comment[task_id]', options_for_select(@order.tasks.map{|t| [t.title, t.id]}), {include_blank: 'Selecciona un trabajo relacionado', class: 'select2-drop'} %>
+          </div>
+          <div class="form-group">
             <%= text_area_tag 'comment[content]', '', size: '100x10', placeholder: 'Ingresa tu comentario...', class: 'form-control', required: 'required' %>
           </div>
           <div class="form-group">

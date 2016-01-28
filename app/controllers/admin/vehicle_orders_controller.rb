@@ -115,7 +115,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   end
 
   def comment_params
-    params.require(:comment).permit(:order_id, :user_id, :content)
+    params.require(:comment).permit(:order_id, :user_id, :content, :task_id)
   end
 
   def task_params
