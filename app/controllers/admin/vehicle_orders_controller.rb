@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
-  before_filter :load_order, only: [:destroy, :add_comment, :new_task, :commit_new_task, :delete_task, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task, :task_details]
+  before_filter :load_order, only: [:destroy, :add_comment, :commit_new_task, :delete_task, :delete_comment, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task, :task_details, :pending_task]
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
@@ -22,6 +22,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
   def show
     @order = @vehicle.orders.includes(:comments).find(params[:id])
     @page_title = "Orden ##{@order.uuid}"
+    @task = @order.tasks.new
   end
 
   def destroy
@@ -37,10 +38,6 @@ class Admin::VehicleOrdersController < Admin::BaseController
     @comment.save
     @order.reload
     @comment.reload
-  end
-
-  def new_task
-    @task = @order.tasks.new
   end
 
   def commit_new_task
@@ -90,6 +87,12 @@ class Admin::VehicleOrdersController < Admin::BaseController
     redirect_to admin_vehicle_order_path(@vehicle, @order)
   end
 
+  def pending_task
+    task = @order.tasks.find(params[:task])
+    task.pending!
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
   def task_details
     @task = @order.tasks.find(params[:task])
     @consumables = @task.supplies_by_type('ConsumableSupply')
@@ -103,6 +106,17 @@ class Admin::VehicleOrdersController < Admin::BaseController
       flash[:success] = 'Se eliminó el trabajo.'
     else
       flash[:error] = 'Ocurrió un problema eliminando el trabajo, inténtalo de nuevo'
+    end
+
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
+  def delete_comment
+    comment = Comment.find(params[:comment_id])
+    if comment.destroy
+      flash[:success] = 'Se eliminó el comentario.'
+    else
+      flash[:error] = 'Ocurrió un problema eliminando el comentario, inténtalo de nuevo'
     end
 
     redirect_to admin_vehicle_order_path(@vehicle, @order)

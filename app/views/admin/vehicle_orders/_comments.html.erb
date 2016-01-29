@@ -4,6 +4,7 @@
       <span class="comment-owner"><strong><%= comment.user.name.titleize %></strong>
         escribió el <%= comment.created_at.in_time_zone.strftime('%d-%m-%Y') %>
         a las <%= comment.created_at.in_time_zone.strftime('%H:%M') %> <%= comment.task ? "sobre el trabajo <strong>#{comment.task.title}</strong>".html_safe : '' %></span>
+      <span><%= link_to '<i class="fa fa-trash"></i>'.html_safe, delete_comment_admin_vehicle_order_path(@vehicle, @order, comment_id: comment.id), method: :delete, data: {confirm: '¿Estás seguro de eliminar este comentario?'} %></span>
       <p><%= comment.content.capitalize %></p>
     </div>
   </div>

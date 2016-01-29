@@ -44,7 +44,8 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-12">
-                <%= link_to 'Finalizar', finish_task_admin_vehicle_order_path(@vehicle, @order, task: task.id), class: 'btn btn-success pull-right', data: {confirm: '¿Estás seguro de finalizar este trabajo?'} %>
+
+                <%= link_to 'Pendiente', pending_task_admin_vehicle_order_path(@vehicle, @order, task: task.id), class: 'btn btn-warning pull-right', data: {confirm: '¿Estás seguro de mover este trabajo a pendiente?'} %>
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@
     <%= label_tag :quantity, 'Cantidad', class: 'col-md-2 control-label' %>
     <div class="col-md-4">
       <%= text_field_tag :quantity, '', id: "quantity-#{@task.id}", class: 'form-control', type: 'number', min: '1', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la cantidad de insumos consumidos.')", :onchange => "this.setCustomValidity('')" %>
+      <span class="help-block" id="qty-help-<%= @task.id %>" style="display: none;"></span>
     </div>
   </div>
   <div class="form-group">
@@ -31,6 +32,8 @@
     $.get(url, function (data) {
       $('#quantity-<%= @task.id %>').val('0');
       $('#quantity-<%= @task.id %>').attr('max', data);
+      $('#qty-help-<%= @task.id %>').html(data +' disponibles.');
+      $('#qty-help-<%= @task.id %>').show();
     });
   });
 

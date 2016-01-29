@@ -1,10 +1,10 @@
-<div class="col-md-12">
+<div class="col-md-12" style="margin-top: 10px;">
   <%= form_tag commit_new_task_admin_vehicle_order_path(@vehicle, @order), remote: true, class: 'form-inline', id: 'new-task-form' do %>
     <div class="form-group">
       <%= label_tag 'task[title]', 'Tarea' %>
       <%= text_field_tag 'task[title]', '', class: 'form-control' %>
     </div>
-    <%= submit_tag 'Guardar', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
+    <%= submit_tag 'Crear', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
   <% end %>
 </div>
 

@@ -43,8 +43,8 @@ Bimotaweb::Application.routes.draw do
       resources :orders, controller: 'vehicle_orders' do
         member do
           post :add_comment, :commit_new_task, :commit_supply, :commit_labor_cost
-          get :new_task, :add_consumable_supply, :get_supply_stock, :add_part_supply, :labor_cost_form, :finish_task, :task_details
-          delete :delete_task
+          get :add_consumable_supply, :get_supply_stock, :add_part_supply, :labor_cost_form, :finish_task, :task_details, :pending_task
+          delete :delete_task, :delete_comment
         end
       end
       member do
