@@ -33,13 +33,21 @@ class Admin::ConsumableSuppliesController < Admin::BaseController
   end
 
   def edit
+    @categories = SupplyCategory.consumable_categories
     @consumable_supply = ConsumableSupply.find params[:id]
     @page_title = @consumable_supply.title.titleize
   end
 
   def update
     @consumable_supply = ConsumableSupply.find params[:id]
-    if @consumable_supply.update_attributes(params[:consumable_supply])
+
+    if params[:new_category]
+      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_CONSUMABLE)
+      @consumable_supply.category = new_category.name
+    end
+
+    if @consumable_supply.update!(supply_params)
+      @consumable_supply.update_attribute(:category, new_category.name)
       flash[:success] = 'Se modificó correctamente el insumo'
       redirect_to admin_consumable_supplies_path
     else

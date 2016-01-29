@@ -1,13 +1,15 @@
 <div class="row">
   <div class="col-md-12 actions">
     <div class="page-header">
-      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, part_supplies_path, :class => 'btn btn-default btn-lg pull-right' %>
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_part_supplies_path, :class => 'btn btn-default btn-lg pull-right' %>
       <h2><%= @page_title %></h2>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= render 'form', is_edit: true %>
+    <%= form_for @part, url: admin_part_supply_path(@part), html: {class: 'form-horizontal'} do |f| %>
+        <%= render 'form', is_edit: true, f: f %>
+    <% end %>
   </div>
 </div>

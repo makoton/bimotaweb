@@ -8,6 +8,8 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= render 'form', is_edit: true %>
+    <%= form_for @consumable_supply, url: admin_consumable_supply_path(@consumable_supply), html: {class: 'form-horizontal'} do |f| %>
+        <%= render 'form', is_edit: true, f: f %>
+    <% end %>
   </div>
 </div>

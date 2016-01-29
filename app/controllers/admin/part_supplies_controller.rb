@@ -35,11 +35,17 @@ class Admin::PartSuppliesController < Admin::BaseController
   def edit
     @part = PartSupply.find params[:id]
     @page_title = @part.title.titleize
+    @categories = SupplyCategory.part_categories
   end
 
   def update
-    @part = PartSupply.find prams[:id]
+    @part = PartSupply.find params[:id]
+    if params[:new_category]
+      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_PART)
+      @part.category = new_category.name
+    end
     if @part.update!(part_params)
+      @part.update_attribute(:category, new_category.name)
       flash[:success] = 'Se modificó correctamente el repuesto'
       redirect_to admin_part_supplies_path
     else
