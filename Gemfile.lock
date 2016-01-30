@@ -107,6 +107,9 @@ GEM
     orm_adapter (0.5.0)
     parser (2.3.0.1)
       ast (~> 2.2)
+    passenger (5.0.23)
+      rack
+      rake (>= 0.8.1)
     pg (0.18.4)
     powerpack (0.1.1)
     rack (1.6.4)
@@ -210,6 +213,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql2
+  passenger
   pg
   rails (~> 4.2)
   rails_12factor

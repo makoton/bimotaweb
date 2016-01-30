@@ -15,6 +15,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'passenger'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier', '>= 1.0.3'
