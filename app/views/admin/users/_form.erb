@@ -1,0 +1,53 @@
+<%= form_for @user_information, url: commit_user_information_admin_user_path(@user), html: {class: 'form-horizontal'} do |f| %>
+    <fieldset>
+
+      <% if @user_information.errors.any? %>
+          <div class="col-md-12 alert alert-danger">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+
+            <p>Hay <%= pluralize(@user_information.errors.count, 'error', 'errores') %>
+              :
+            </p>
+            <ul>
+              <% @user_information.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :name, 'Nombre', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <span class="form-control"> <%= @user.name%></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :rut, 'Rut', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.text_field :rut, class: 'form-control',placeholder: 'RUT sin punto ni guion', required: 'required', oninput: 'checkRut(this)' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :contact_phone, 'Número de contacto', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.text_field :contact_phone, type: 'number',  class: 'form-control', required: 'required' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address, 'Direccion', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.text_field :address, class: 'form-control', required: 'required' %>
+        </div>
+      </div>
+
+    </fieldset>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-4">
+        <%= f.submit 'Guardar', :class => 'btn btn-primary' %>
+      </div>
+    </div>
+<% end %>

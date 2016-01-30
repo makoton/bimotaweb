@@ -21,7 +21,11 @@ Bimotaweb::Application.routes.draw do
   namespace :admin do
     root to: 'orders#index'
 
-    resources :users
+    resources :users do
+      member do
+       post :commit_user_information
+      end
+    end
     resources :orders
     resources :consumable_supplies do
       collection do

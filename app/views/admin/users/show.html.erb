@@ -16,7 +16,7 @@
 
         <dt>Email</dt>
         <dd><%= @user.email %></dd>
-        <% if @user.user_information %>
+        <% if @user.user_information.id %>
             <dt>Rut</dt>
             <dd><%= @user.user_information.rut %></dd>
 
@@ -27,6 +27,10 @@
             <dd><%= @user.user_information.address %></dd>
         <% else %>
             <h5>El usuario aun no completa sus datos personales</h5>
+            <li>
+              <%= link_to '<i class="fa fa-plus"></i> Agregar aca'.html_safe, '#', data: {toggle: 'modal', target: '#userData'} %>
+              <%= render partial: 'user_data_modal' %>
+            </li>
         <% end %>
       </dl>
     </div>

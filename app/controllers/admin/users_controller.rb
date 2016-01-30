@@ -24,7 +24,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def show
+
     @user = User.includes(:user_information).find(params[:id])
+    @user_information = @user.user_information ? @user.user_information : @user.build_user_information
     @vehicles = @user.bike_vehicles
     unless @user
       flash[:info] = 'Ocurrió un error accediendo a la información de ese usuario. Inténtalo de nuevo.'
@@ -51,6 +53,25 @@ class Admin::UsersController < Admin::BaseController
       flash[:success] = "Invitacion enviada a #{params[:name]}"
       redirect_to users_path
     end
+  end
+
+  def commit_user_information
+    @user = User.find params[:id]
+    @user_information = @user.build_user_information(user_information_params)
+    @user_information.name = @user.name
+    if @user_information.save
+      flash[:success] = 'Se guardaron los datos con éxito!'
+      redirect_to admin_user_path(@user) and return
+    else
+      flash[:error] = 'w/e'
+      redirect_to admin_user_path(@user)
+    end
+  end
+
+  private
+
+  def user_information_params
+    params.require(:user_information).permit(:name,:rut,:contact_phone,:address, :user_id)
   end
 
 end

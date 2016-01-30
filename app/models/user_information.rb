@@ -9,6 +9,7 @@ class UserInformation < ActiveRecord::Base
 
   #validations
   validates_presence_of :name, :rut, :address, :contact_phone
+  validates_uniqueness_of :rut
 
   #business methods
 
