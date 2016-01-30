@@ -4,6 +4,6 @@ class AddFieldsToOrders < ActiveRecord::Migration
     add_column :orders, :started_by, :string
     add_column :orders, :started_at, :datetime
     add_column :orders, :finished_by, :string
-    add_column :orders, :finished_at, :datetime
+    #add_column :orders, :finished_at, :datetime
   end
 end
