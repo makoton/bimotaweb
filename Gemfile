@@ -2,12 +2,17 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2'
 
-group :development do
+group :development, :test do
   gem 'mysql2'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rubocop', require: false
   gem 'rails_best_practices'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :production do
