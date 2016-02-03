@@ -36,5 +36,6 @@ gem 'kaminari'
 gem 'devise-i18n'
 gem 'select2-rails'
 gem 'font-awesome-sass'
+gem 'counter_culture', '~> 0.1.33'
 
-ruby '2.2.1'
+# ruby '2.2.1'
