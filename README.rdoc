@@ -1,4 +1,4 @@
-== BimotaWeb App
+# BimotaWeb App
 [![Build Status](https://drone.io/github.com/makoton/bimotaweb/status.png)](https://drone.io/github.com/makoton/bimotaweb/latest)
 
 This App is our final project at our university!
