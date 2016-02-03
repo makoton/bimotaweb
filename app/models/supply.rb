@@ -41,7 +41,7 @@ class Supply < ActiveRecord::Base
   end
 
   def notify_critical_stock
-    if supply_items.available.count <= critical_stock
+    if self.available_supplies_count <= critical_stock
       #TODO send email
       Setting.first.mail_list.each do |email|
         #send_email(email)

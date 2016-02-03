@@ -12,7 +12,7 @@
           <%= label_tag :units, 'Cantidad', class: 'col-md-2 control-label' %>
           <div class="col-md-6">
             <%= text_field_tag :units, 0, type: 'number', min: '1', class: 'form-control' %>
-            <p class="help-block">Se agregará este numero de unidades al stock actual de <%= @supply.supply_items.available.count %></p>
+            <p class="help-block">Se agregará este numero de unidades al stock actual de <%= @supply.available_supplies_count %></p>
           </div>
         </div>
 

@@ -65,7 +65,7 @@ class Admin::VehicleOrdersController < Admin::BaseController
 
   def get_supply_stock
     supply = Supply.find(params[:supply])
-    render text: supply.supply_items.available.count
+    render text: supply.available_supplies_count
   end
 
   def labor_cost_form
