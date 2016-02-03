@@ -13,12 +13,9 @@ class Admin::ConsumableSuppliesController < Admin::BaseController
   end
 
   def create
-    @consumable_supply = ConsumableSupply.create(supply_params)
+    process_category
 
-    if params[:new_category]
-      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_CONSUMABLE)
-      @consumable_supply.category = new_category.name
-    end
+    @consumable_supply = ConsumableSupply.create(supply_params)
 
     if @consumable_supply.save
       flash[:success] = 'Insumo creado'
@@ -41,13 +38,9 @@ class Admin::ConsumableSuppliesController < Admin::BaseController
   def update
     @consumable_supply = ConsumableSupply.find params[:id]
 
-    if params[:new_category]
-      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_CONSUMABLE)
-      @consumable_supply.category = new_category.name
-    end
+    process_category
 
     if @consumable_supply.update!(supply_params)
-      @consumable_supply.update_attribute(:category, new_category.name)
       flash[:success] = 'Se modificó correctamente el insumo'
       redirect_to admin_consumable_supplies_path
     else
@@ -85,6 +78,13 @@ class Admin::ConsumableSuppliesController < Admin::BaseController
   private
 
   def supply_params
-    params.require(:consumable_supply).permit(:brand, :model, :price, :category)
+    params.require(:consumable_supply).permit(:brand, :model, :price, :category, :critical_stock)
+  end
+
+  def process_category
+    if params[:new_category]
+      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_CONSUMABLE)
+      params[:consumable_supply][:category] = new_category.name
+    end
   end
 end

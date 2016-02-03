@@ -57,7 +57,11 @@ Bimotaweb::Application.routes.draw do
       end
     end
     resources :bike_brands
-    resources :settings
+    resource :setting do
+      member do
+        patch :commit_changes
+      end
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

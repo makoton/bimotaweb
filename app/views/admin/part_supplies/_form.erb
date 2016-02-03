@@ -71,6 +71,14 @@
       </div>
   <% end %>
 
+  <div class="form-group">
+    <%= f.label :critical_stock, 'Stock Crítico', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= f.text_field :critical_stock, class: 'form-control', type: 'number', min: '0', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el stock crtítico.')", :onchange => "this.setCustomValidity('')" %>
+      <p class="help-block">Se notificará cuando el stock llegue a este valor</p>
+    </div>
+  </div>
+
 </fieldset>
 <div class="form-group">
   <div class="col-md-offset-2 col-md-4">

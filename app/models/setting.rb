@@ -1,7 +1,13 @@
 # -*- encoding : utf-8 -*-
 class Setting < ActiveRecord::Base
 
-  # serialize :consumable_categories
-  # serialize :part_categories
+
+
+  #returns an array with the emails
+  def mail_list
+    stock_mail_list.gsub(' ', '').split(',')
+  rescue
+    []
+  end
 
 end

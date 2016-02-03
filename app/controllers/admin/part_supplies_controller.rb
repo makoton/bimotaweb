@@ -13,12 +13,9 @@ class Admin::PartSuppliesController < Admin::BaseController
   end
 
   def create
-    @part = PartSupply.create(part_params)
+    process_category
 
-    if params[:new_category]
-      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_PART)
-      @part.category = new_category.name
-    end
+    @part = PartSupply.create(part_params)
 
     if @part.save
       flash[:success] = 'Repuesto creado'
@@ -40,12 +37,10 @@ class Admin::PartSuppliesController < Admin::BaseController
 
   def update
     @part = PartSupply.find params[:id]
-    if params[:new_category]
-      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_PART)
-      @part.category = new_category.name
-    end
+
+    process_category
+
     if @part.update!(part_params)
-      @part.update_attribute(:category, new_category.name)
       flash[:success] = 'Se modificó correctamente el repuesto'
       redirect_to admin_part_supplies_path
     else
@@ -83,6 +78,13 @@ class Admin::PartSuppliesController < Admin::BaseController
   private
 
   def part_params
-    params.require(:part_supply).permit(:brand, :model, :price, :category)
+    params.require(:part_supply).permit(:brand, :model, :price, :category, :critical_stock)
+  end
+
+  def process_category
+    if params[:new_category]
+      new_category = SupplyCategory.create(name: params[:new_category], supply_type: SupplyCategory::TYPE_PART)
+      params[:part_supply][:category] = new_category.name
+    end
   end
 end
