@@ -45,6 +45,7 @@ class Supply < ActiveRecord::Base
       #TODO send email
       Setting.first.mail_list.each do |email|
         #send_email(email)
+        SupplyMailer.low_stock(email, self).deliver_now
       end
     end
   end

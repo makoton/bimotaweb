@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<h1>Quedan pocas unidades de <%= @supply.title %> !!</h1>
+<p>
+  El <%= @type %> tiene configurado un stock crítico de <%= @supply.critical_stock %>, y en este momento
+  quedan <%= @supply.available_supplies_count %> (ingresados en el sistema).
+</p>
+<p>
+  Si hay más stock del que te informamos, por favor actualizalo <a href="<%= @url %>">aquí</a>.
+</p>
+</body>
