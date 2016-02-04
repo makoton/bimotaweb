@@ -261,7 +261,7 @@ DEPENDENCIES
   rails (~> 4.2)
   rails_12factor
   rails_best_practices
-  rspec-rails (~> 3.0.0)
+  rspec-rails
   rubocop
   sass-rails
   select2-rails
