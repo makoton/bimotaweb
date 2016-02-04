@@ -24,6 +24,9 @@ Bimotaweb::Application.routes.draw do
       member do
        post :commit_user_information
       end
+      collection do
+        get :check_existing_rut
+      end
     end
     resources :orders
     resources :consumable_supplies do

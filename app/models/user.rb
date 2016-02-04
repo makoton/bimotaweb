@@ -21,6 +21,5 @@ class User < ActiveRecord::Base
   def role?(role)
     self.role == role.to_s
   end
-
   
 end

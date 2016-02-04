@@ -41,6 +41,15 @@ function checkRut(rut) {
     // Validar que el Cuerpo coincide con su Dígito Verificador
     if(dvEsperado != dv) { rut.setCustomValidity("RUT Inválido"); return false; }
 
+
+    $.get('/admin/users/check_existing_rut', {"rut": cuerpo + (dv == 11)?0:dv}).done(function(data){
+        if(data.result === true){
+            console.log(data.result);
+            //ya existe el rut
+            rut.setCustomValidity("Este rut ya fue ingresado en otro usuario."); return false;
+        }
+    });
+
     // Si todo sale bien, eliminar errores (decretar que es válido)
     rut.setCustomValidity('');
 }

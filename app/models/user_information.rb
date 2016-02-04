@@ -5,7 +5,7 @@ class UserInformation < ActiveRecord::Base
   belongs_to :user
 
   #callbacks
-  before_create :strip_rut
+  before_create :strip_rut_callback
 
   #validations
   validates_presence_of :name, :rut, :address, :contact_phone
@@ -13,13 +13,18 @@ class UserInformation < ActiveRecord::Base
 
   #business methods
 
-
-
-  def strip_rut
-    self.rut = rut.gsub('.', '').gsub('-','').gsub(' ','')
+  def self.rut_exists?(rut)
+    self.where('rut like ?', "%#{strip_rut(rut)}").any?
+  rescue
+    false
   end
 
-  def format_rut
-
+  def self.strip_rut(rut)
+    rut = rut.gsub('.', '').gsub('-','').gsub(' ','')
   end
+
+  def strip_rut_callback
+    self.rut = UserInformation.strip_rut(self.rut)
+  end
+
 end

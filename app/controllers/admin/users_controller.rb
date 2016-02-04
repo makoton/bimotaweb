@@ -37,24 +37,6 @@ class Admin::UsersController < Admin::BaseController
 
   end
 
-  def invite
-    unless can? :manage, User
-      flash[:error] = 'No Autorizado >:('
-      redirect_to root_path
-    end
-  end
-
-  def commit_invite
-    if params[:email].blank?
-      flash[:info] = 'Ingresa un correo.'
-      redirect_to :invite
-    else
-      User.invite!(:email => params[:email], :name => params[:name])
-      flash[:success] = "Invitacion enviada a #{params[:name]}"
-      redirect_to users_path
-    end
-  end
-
   def commit_user_information
     @user = User.find params[:id]
     @user_information = @user.build_user_information(user_information_params)
@@ -66,6 +48,10 @@ class Admin::UsersController < Admin::BaseController
       flash[:error] = 'w/e'
       redirect_to admin_user_path(@user)
     end
+  end
+
+  def check_existing_rut
+    render json: {result: UserInformation.rut_exists?(params[:rut])}.to_json
   end
 
   private
