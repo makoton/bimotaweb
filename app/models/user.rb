@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_one :user_information
 
+  accepts_nested_attributes_for :user_information, allow_destroy: true
+
   ROLES = %w[admin mechanic operator]
 
   # Include default devise modules. Others available are:

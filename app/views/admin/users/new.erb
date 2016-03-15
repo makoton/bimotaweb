@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_users_path, :class => 'btn btn-default btn-lg pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <%= form_for @user, url: admin_users_path, html: {class: 'form-horizontal'} do |f| %>
+
+      <div class="form-group">
+        <%= f.label :name, 'Nombre', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.text_field :name, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el nombre del usuario.')", :onchange => "this.setCustomValidity('')" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email, 'Email', class: 'col-md-2 control-label' %>
+        <div class="col-md-4">
+          <%= f.email_field :email, class: 'form-control', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa el email del usuario.')", :onchange => "this.setCustomValidity('')" %>
+        </div>
+      </div>
+
+      <%= f.fields_for :user_information do |ff| %>
+
+        <div class="form-group">
+          <%= ff.label :rut, 'Rut', class: 'col-md-2 control-label' %>
+          <div class="col-md-4">
+            <%= ff.text_field :rut, class: 'form-control', placeholder: 'RUT sin punto ni guion', required: 'required', oninput: 'checkRut(this)' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= ff.label :contact_phone, 'Número de contacto', class: 'col-md-2 control-label' %>
+          <div class="col-md-4">
+            <%= ff.text_field :contact_phone, type: 'number', class: 'form-control', required: 'required' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= ff.label :address, 'Direccion', class: 'col-md-2 control-label' %>
+          <div class="col-md-4">
+            <%= ff.text_field :address, class: 'form-control', required: 'required' %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-4">
+          <%= f.submit 'Confirmar', :class => 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

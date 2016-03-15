@@ -54,10 +54,33 @@ class Admin::UsersController < Admin::BaseController
     render json: {result: UserInformation.rut_exists?(params[:rut])}.to_json
   end
 
+  def new
+    @page_title = 'Nuevo usuario.'
+    @user = User.new
+    @user.build_user_information
+  end
+
+  def create
+    params[:user][:password] = 'cambiame'
+    params[:user][:password_confirmation] = 'cambiame'
+    @user = User.new(user_params)
+    @user.user_information.name = @user.name
+    if @user.save
+      flash[:success] = 'El usuario fue creado exitosamente'
+    else
+      flash[:error] = 'Ocurrió un problema al crear el usuario, inténtalo nuevamente.'
+    end
+    redirect_to admin_users_path
+  end
+
   private
 
   def user_information_params
-    params.require(:user_information).permit(:name,:rut,:contact_phone,:address, :user_id)
+    params.require(:user_information).permit(:name, :rut, :contact_phone, :address, :user_id)
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :user_information_attributes => [:id, :name, :rut, :contact_phone, :address, :user_id])
   end
 
 end
