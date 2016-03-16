@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class Admin::VehicleOrdersController < Admin::BaseController
   before_filter :load_vehicle
-  before_filter :load_order, only: [:destroy, :add_comment, :commit_new_task, :delete_task, :delete_comment, :add_consumable_supply, :commit_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task, :task_details, :pending_task]
+  before_filter :load_order, only: [:destroy, :start, :finish, :add_comment, :commit_new_task, :delete_task, :delete_comment, :add_consumable_supply, :remove_part_supply, :remove_consumable_supply, :commit_supply, :commit_remove_supply, :add_part_supply, :labor_cost_form, :commit_labor_cost, :finish_task, :task_details, :pending_task]
+  before_filter :load_task, except: [:index, :new, :show, :destroy, :start, :finish, :commit_new_task, :add_comment, :get_consumed_supplies, :get_supply_stock, :delete_comment]
 
   def index
     @page_title = "Ordenes para #{@vehicle.full_name} - #{@vehicle.user ? @vehicle.user.name.titleize : 'Sin Dueño'}"
@@ -32,6 +33,16 @@ class Admin::VehicleOrdersController < Admin::BaseController
     redirect_to admin_vehicle_orders_path(@vehicle)
   end
 
+  def start
+    @order.start!(current_user)
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
+  def finish
+    @order.finish!(current_user)
+    redirect_to admin_vehicle_order_path(@vehicle, @order)
+  end
+
   def add_comment
     @comment = @order.comments.new(comment_params)
     @comment.user = current_user
@@ -46,21 +57,36 @@ class Admin::VehicleOrdersController < Admin::BaseController
     @result = @task.save
   end
 
+  def remove_consumable_supply
+    render partial: 'remove_consumable_supply_form'
+  end
+
+  def remove_part_supply
+    render partial: 'remove_part_supply_form'
+  end
+
   def add_consumable_supply
-    @task = @order.tasks.find(params[:task])
     render partial: 'consumable_supply_form'
   end
 
   def add_part_supply
-    @task = @order.tasks.find(params[:task])
     render partial: 'part_supply_form'
   end
 
-  def commit_supply
-    task = @order.tasks.find(params[:task])
+  def commit_remove_supply
     supply = Supply.find(params[:supply])
-    supply.assign_to_task(task, params[:quantity])
+    supply.unassign_from_task(@task, params[:quantity])
     render 'commit_new_task'
+  end
+
+  def commit_supply
+    supply = Supply.find(params[:supply])
+    supply.assign_to_task(@task, params[:quantity])
+    render 'commit_new_task'
+  end
+
+  def get_consumed_supplies
+    render text: Task.find(params[:task]).supply_items.where(supply_id: params[:supply]).count
   end
 
   def get_supply_stock
@@ -69,40 +95,34 @@ class Admin::VehicleOrdersController < Admin::BaseController
   end
 
   def labor_cost_form
-    @task = @order.tasks.find(params[:task])
     render partial: 'labor_form'
   end
 
   def commit_labor_cost
-    task = @order.tasks.find(params[:task])
-    task.labor_cost = params[:amount]
-    task.save
-    task.recalc!
+    @task.labor_cost = params[:amount]
+    @task.save
+    @task.recalc!
     render 'commit_new_task'
   end
 
   def finish_task
-    task = @order.tasks.find(params[:task])
-    task.finish!
+    @task.finish!
     redirect_to admin_vehicle_order_path(@vehicle, @order)
   end
 
   def pending_task
-    task = @order.tasks.find(params[:task])
-    task.pending!
+    @task.pending!
     redirect_to admin_vehicle_order_path(@vehicle, @order)
   end
 
   def task_details
-    @task = @order.tasks.find(params[:task])
     @consumables = @task.supplies_by_type('ConsumableSupply')
     @parts = @task.supplies_by_type('PartSupply')
     render partial: 'task_detail'
   end
 
   def delete_task
-    task = @order.tasks.find(params[:task_id])
-    if task.destroy
+    if @task.destroy
       flash[:success] = 'Se eliminó el trabajo.'
     else
       flash[:error] = 'Ocurrió un problema eliminando el trabajo, inténtalo de nuevo'
@@ -142,6 +162,10 @@ class Admin::VehicleOrdersController < Admin::BaseController
 
   def load_order
     @order = @vehicle.orders.find(params[:id])
+  end
+
+  def load_task
+    @task = @order.tasks.find(params[:task])
   end
 
 end

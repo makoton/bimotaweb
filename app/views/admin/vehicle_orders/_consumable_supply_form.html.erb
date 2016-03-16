@@ -29,7 +29,6 @@
 
   $('#supply-<%= @task.id %>').on('change', function () {
     var that = $(this);
-    var help_span = that.parent().parent().find('.qty-help');
     url = '<%= get_supply_stock_admin_vehicle_order_path(@vehicle, @order) %>?supply=' + $(this).val();
     $.get(url, function (data) {
       $('#quantity-<%= @task.id %>').val('0');

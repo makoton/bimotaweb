@@ -40,6 +40,12 @@ class Supply < ActiveRecord::Base
     end
   end
 
+  def unassign_from_task(task, quantity)
+    quantity.to_i.times do
+      self.supply_items.where(task_id: task.id).last.back_to_stock(task)
+    end
+  end
+
   def notify_critical_stock
     if self.available_supplies_count <= critical_stock
       #TODO send email

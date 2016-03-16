@@ -30,6 +30,14 @@ class SupplyItem < ActiveRecord::Base
     task.recalc!
   end
 
+  def back_to_stock(task)
+    self.task = nil
+    self.status = STATUS_AVAILABLE
+    self.price_at_assignment = 0
+    self.save
+    task.recalc!
+  end
+
   def is_available?
     return true if self.status == STATUS_AVAILABLE
     false

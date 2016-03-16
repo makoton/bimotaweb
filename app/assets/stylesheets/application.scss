@@ -46,3 +46,35 @@
 .help-block {
   font-size: 11px;
 }
+
+.navbar-text {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media (max-width: 675px){
+  .btn-task {
+    width: 100%;
+    .dropdown-toggle {
+      width:100%;
+    }
+  }
+
+  .task-header-actions-lg{
+    display: none;
+  }
+
+  .task-header-actions-sm{
+    display: inherit;
+  }
+}
+
+@media (min-width: 676px){
+  .task-header-actions-lg{
+    display: inherit;
+  }
+
+  .task-header-actions-sm{
+    display: none;
+  }
+}

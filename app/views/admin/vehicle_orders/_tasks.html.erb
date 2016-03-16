@@ -4,27 +4,64 @@
     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading"><%= task.title.capitalize %>
-          <span class="pull-right"><%= link_to '<i class="fa fa-trash"></i>'.html_safe, delete_task_admin_vehicle_order_path(@vehicle, @order, task_id: task.id), method: :delete, data: {confirm: '¿Estás seguro de eliminar esta tarea?'} %></span>
+          <span class="pull-right"><%= link_to '<i class="fa fa-trash"></i>'.html_safe, delete_task_admin_vehicle_order_path(@vehicle, @order, task: task.id), method: :delete, data: {confirm: '¿Estás seguro de eliminar esta tarea?'} %></span>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-md-12">
               <strong>Acciones:</strong>
-              <a href="#" class="btn btn-default action-btn" data-action-url="<%= add_consumable_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
-                Insumo
-                utilizado</a>
-              <a href="#" class="btn btn-default action-btn" data-action-url="<%= add_part_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
-                Repuesto
-                utilizado</a>
-              <a href="#" class="btn btn-default action-btn" data-action-url="<%= labor_cost_form_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-plus"></i>
+              <% if task.supplies_by_type('ConsumableSupply').any? %>
+                <div class="btn-group btn-task">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Insumos <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#" class="nested-action-btn" data-action-url="<%= add_consumable_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
+                        Agregar Insumo</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <a href="#" class="nested-action-btn" data-action-url="<%= remove_consumable_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-minus"></i>
+                        Restar Insumo </a></li>
+                  </ul>
+                </div>
+              <% else %>
+                <a href="#" class="btn btn-default action-btn btn-task" data-action-url="<%= add_consumable_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
+                  Agregar Insumo</a>
+              <% end %>
+
+
+              <% if task.supplies_by_type('PartSupply').any? %>
+                <div class="btn-group btn-task">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Repuestos <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="#" class="nested-action-btn" data-action-url="<%= add_part_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
+                        Agregar Repuesto</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                      <a href="#" class="nested-action-btn" data-action-url="<%= remove_part_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-minus"></i>
+                        Restar Repuesto </a></li>
+                  </ul>
+                </div>
+              <% else %>
+                <a href="#" class="btn btn-default action-btn btn-task" data-action-url="<%= add_part_supply_admin_vehicle_order_path(@vehicle, @order, task: task.id, format: 'js') %>"><i class="fa fa-plus"></i>
+                  Agregar Repuesto</a>
+              <% end %>
+
+
+              <a href="#" class="btn btn-default action-btn btn-task" data-action-url="<%= labor_cost_form_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-plus"></i>
                 Mano de obra</a>
-              <%= link_to 'Finalizar', finish_task_admin_vehicle_order_path(@vehicle, @order, task: task.id), class: 'btn btn-success pull-right', data: {confirm: '¿Estás seguro de finalizar este trabajo?'} %>
+              <%= link_to 'Finalizar', finish_task_admin_vehicle_order_path(@vehicle, @order, task: task.id), class: 'btn btn-success pull-right btn-task', data: {confirm: '¿Estás seguro de finalizar este trabajo?'} %>
             </div>
             <div class="col-md-12 actions-panel" style="display: none;"></div>
           </div>
         </div>
         <div class="panel-footer">
-          <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+          <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i>
+            resumen</a>
           <div class="details-panel" style="display: none;"></div>
         </div>
       </div>
@@ -50,7 +87,8 @@
             </div>
           </div>
           <div class="panel-footer">
-            <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i> resumen</a>
+            <a href="#" class="task-details" data-task-url="<%= task_details_admin_vehicle_order_path(@vehicle, @order, task: task.id) %>"><i class="fa fa-angle-double-down"></i>
+              resumen</a>
             <div class="details-panel" style="display: none;"></div>
           </div>
         </div>
@@ -63,34 +101,49 @@
 
 <script type="text/javascript">
   function clearPanel($el) {
-    if (!($el.parent().parent().find('.actions-panel').is(':hidden'))) {
-      $el.parent().parent().find('.actions-panel').slideToggle();
+    if (!($el.is(':hidden'))) {
+      $el.slideToggle();
     }
   }
 
   function showActionPanel($el) {
-    $el.parent().parent().find('.actions-panel').slideToggle();
+    $el.slideToggle();
   }
 
-  function toggleDetailsPanel($el){
+  function toggleDetailsPanel($el) {
     $el.slideToggle();
   }
 
   $('.action-btn').on('click', function () {
     var that = $(this);
-    clearPanel(that);
     var url = that.data('action-url');
+    var action_panel = that.parent().parent().find('.actions-panel');
+    clearPanel($(action_panel));
     $.get(url, function (data) {
-      that.parent().parent().find('.actions-panel').html(data);
+      action_panel.html(data);
     });
-    showActionPanel($(this));
+    showActionPanel($(action_panel));
+  });
+
+  $('.nested-action-btn').on('click', function () {
+    var that = $(this);
+    var url = that.data('action-url');
+    var action_panel = that.parent().parent().parent().parent().parent().find('.actions-panel');
+    clearPanel($(action_panel));
+    console.log('aaaa');
+    console.log(url);
+    $.get(url, function (data) {
+      console.log(data);
+      action_panel.html(data);
+    });
+    showActionPanel($(action_panel));
   });
 
   $('.task-details').on('click', function () {
     var that = $(this);
     var panel = that.parent().find('.details-panel');
 
-    if(!panel.is(':hidden')){
+    if (!panel.is(':hidden')) {
       toggleDetailsPanel(panel);
       return false;
     }

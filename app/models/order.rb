@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
   has_many :comments
 
   before_create :generate_uuid
+  before_save :update_last_change
 
   #constants
   STATUS_NEW = 'new'
@@ -34,7 +35,14 @@ class Order < ActiveRecord::Base
     self.finished_at = Time.now
     self.finished_by = finished_by_user.name
     self.current_state = STATUS_FINISHED
+    self.tasks.each do |task|
+      task.finish!
+    end
     self.save
+  end
+
+  def update_last_change
+    self.last_update = Time.now
   end
 
   private

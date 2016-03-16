@@ -1,0 +1,43 @@
+<%= form_tag commit_remove_supply_admin_vehicle_order_path(@vehicle, @order), remote: true, class: 'form-horizontal', id: "frm-rem-part-#{@task.id}" do %>
+  <%= hidden_field_tag 'task', @task.id %>
+  <div class="form-group">
+    <%= label_tag :supply, 'Repuesto', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= select_tag 'supply', options_for_select(@task.consumed_supplies_by_type('PartSupply').map{|s| [s.title, s.id]}), {include_blank: 'Selecciona', class: 'select2-drop col-md-12', id: "supply-rem-#{@task.id}"} %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :quantity, 'Cantidad', class: 'col-md-2 control-label' %>
+    <div class="col-md-4">
+      <%= text_field_tag :quantity, '', id: "quantity-rem-#{@task.id}", class: 'form-control', type: 'number', min: '1', required: 'required', :oninvalid => "this.setCustomValidity('Ingresa la cantidad de repuestos consumidos.')", :onchange => "this.setCustomValidity('')" %>
+      <span class="help-block" id="qty-help-rem-<%= @task.id %>" style="display: none;"></span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-4">
+      <a class="close-panel btn btn-default" href="#">Cancelar</a>
+      <%= submit_tag 'Guardar', :class => 'btn btn-primary', data: {disable_with: 'Guardando...'} %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(".select2-drop").select2({
+    theme: "bootstrap"
+  });
+
+  $('#supply-rem-<%= @task.id %>').on('change', function () {
+    url = '<%= get_consumed_supplies_admin_vehicle_order_path(@vehicle, @order) %>?supply=' + $(this).val() + '&task=<%= @task.id %>';
+    $.get(url, function (data) {
+      $('#quantity-rem-<%= @task.id %>').val('0');
+      $('#quantity-rem-<%= @task.id %>').attr('max', data);
+      $('#qty-help-rem-<%= @task.id %>').html(data +' utilizados.');
+      $('#qty-help-rem-<%= @task.id %>').show();
+    });
+  });
+
+  $('.close-panel').on('click', function () {
+    $(this).parent().parent().parent().parent().slideToggle();
+  });
+</script>

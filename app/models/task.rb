@@ -12,6 +12,8 @@ class Task < ActiveRecord::Base
   scope :pending, -> { where(status: STATUS_PENDING) }
   scope :finished, -> { where(status: STATUS_FINISHED) }
 
+  after_save :update_order_change
+
   def finish!
     self.update_attribute(:status, STATUS_FINISHED)
   end
@@ -26,6 +28,10 @@ class Task < ActiveRecord::Base
     []
   end
 
+  def consumed_supplies_by_type(type)
+    type.constantize.where(id: [self.supplies_by_type(type).select('supply_items.supply_id').uniq.map{|s| s.supply_id}])
+  end
+
   def total_cost_of_supplies_by_type(type)
     total = 0
     supplies_by_type(type).each{|item| total += item.price_at_assignment.to_i}
@@ -38,5 +44,9 @@ class Task < ActiveRecord::Base
     costs = (self.total_cost_of_supplies_by_type('ConsumableSupply')) + (self.total_cost_of_supplies_by_type('PartSupply')) + self.labor_cost
     self.update_attribute(:total_amount, costs)
     self.save
+  end
+
+  def update_order_change
+    self.order.save
   end
 end

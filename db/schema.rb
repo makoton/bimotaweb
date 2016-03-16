@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160203021309) do
+ActiveRecord::Schema.define(version: 20160316000130) do
 
   create_table "bike_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(version: 20160203021309) do
     t.datetime "started_at"
     t.string   "finished_by",   limit: 255
     t.datetime "finished_at"
+    t.datetime "last_update"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "orders", ["uuid"], name: "index_orders_on_uuid", unique: true, using: :btree

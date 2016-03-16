@@ -1,33 +1,27 @@
-<dl class="dl-vm details">
-  <dt style="<%= 'margin-right: 20px;' if @consumables.count == 0 %>">Insumos (<%= @consumables.count %>)</dt>
-  <% if @consumables.any? %>
-    <dd>
-      <ul>
-        <% @consumables.group(:supply_id).each do |supply_item| %>
+<div class="row">
+  <div class="col-md-4">
+    <strong>Insumos (<%= @consumables.count %>)</strong>
+    <ul>
+      <% @consumables.group(:supply_id).each do |supply_item| %>
         <li><%= "#{supply_item.supply.title} (#{@consumables.where(supply_id: supply_item.supply_id).count})" %></li>
-        <% end %>
-      </ul>
-    </dd>
-  <% end %>
-
-  <dt style="<%= 'margin-right: 20px;' if @parts.count == 0 %>">Repuestos (<%= @parts.count %>)</dt>
-  <% if @parts.any? %>
-    <dd>
-      <ul>
-        <% @parts.group(:supply_id).each do |supply_item| %>
-          <li><%= "#{supply_item.supply.title} (#{@parts.where(supply_id: supply_item.supply_id).count})" %></li>
-        <% end %>
-      </ul>
-    </dd>
-  <% end %>
-
-  <dt>Costos</dt>
-  <dd>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <strong>Repuestos (<%= @parts.count %>)</strong>
+    <ul>
+      <% @parts.group(:supply_id).each do |supply_item| %>
+        <li><%= "#{supply_item.supply.title} (#{@parts.where(supply_id: supply_item.supply_id).count})" %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <strong>Costos</strong>
     <ul>
       <li><strong>Mano de obra:</strong> <%= money_for @task.labor_cost %></li>
       <li><strong>Total insumos:</strong> <%= money_for @task.total_cost_of_supplies_by_type('ConsumableSupply') %></li>
       <li><strong>Total repuestos:</strong> <%= money_for @task.total_cost_of_supplies_by_type('PartSupply') %></li>
-      <li style="border-top: 1px solid;"><strong>Total trabajo:</strong> <%= money_for @task.total_amount %></li>
+      <li><div style="border-top: 1px solid;display: inline-block;"><strong>Total trabajo:</strong> <%= money_for @task.total_amount %></div></li>
     </ul>
-  </dd>
-</dl>
+  </div>
+</div>
