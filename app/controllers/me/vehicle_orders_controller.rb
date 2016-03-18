@@ -10,6 +10,14 @@ class Me::VehicleOrdersController < ApplicationController
 
   def show
     @page_title = "Orden ##{@order.uuid}"
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'orden_willy',
+               :template => 'me/vehicle_orders/show.pdf.erb'
+      end
+    end
   end
 
   private
