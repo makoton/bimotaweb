@@ -29,6 +29,11 @@ class Admin::ConsumableSuppliesController < Admin::BaseController
     end
   end
 
+  def show
+    @consumable_supply = ConsumableSupply.includes(:supply_items).find(params[:id])
+    @page_title = @consumable_supply.title.titleize
+  end
+
   def edit
     @categories = SupplyCategory.consumable_categories
     @consumable_supply = ConsumableSupply.find params[:id]

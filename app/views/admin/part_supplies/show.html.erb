@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, admin_part_supplies_path, :class => 'btn btn-default btn-lg pull-right' %>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+
+    <dl>
+      <dt>Marca</dt>
+      <dd><%= @part.brand %></dd>
+      <dt>Modelo</dt>
+      <dd><%= @part.model %></dd>
+      <dt>Categoría</dt>
+      <dd><%= @part.category %></dd>
+      <dt>Precio</dt>
+      <dd><%= money_for @part.price %></dd>
+      <dt>Stock actual</dt>
+      <dd><%= @part.supply_items.available.count %> <%= link_to '<i class="fa fa-plus"></i> Agregar unidades'.html_safe, '#', class: 'add-units', style: 'font-size: 10px;', data: {supply_id: @part.id} %></dd>
+      <dt>Stock consumido</dt>
+      <dd><%= @part.supply_items.unavailable.count %></dd>
+    </dl>
+
+  </div>
+</div>
+
+
+<div id="add-units-modal"></div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.add-units').on('click', function(){
+      var supply_id = $(this).data('supply-id');
+      var url = '<%= add_units_modal_admin_part_supplies_path(format: 'js') %>?supply_id='+ supply_id;
+      $.getScript(url);
+    });
+  });
+</script>

@@ -29,6 +29,11 @@ class Admin::PartSuppliesController < Admin::BaseController
     end
   end
 
+  def show
+    @part = PartSupply.includes(:supply_items).find(params[:id])
+    @page_title = @part.title.titleize
+  end
+
   def edit
     @part = PartSupply.find params[:id]
     @page_title = @part.title.titleize
