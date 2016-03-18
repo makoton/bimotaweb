@@ -8,6 +8,7 @@ Bimotaweb::Application.routes.draw do
 
     resource :user do
       member do
+        get :profile
         post :commit_user_information
       end
     end

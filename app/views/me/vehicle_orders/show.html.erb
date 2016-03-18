@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12 actions">
+    <div class="page-header">
+      <div class="task-header-actions-lg">
+        <%= link_to '<i class="fa fa-chevron-left"></i> Volver'.html_safe, me_vehicle_orders_path(@vehicle), :class => 'btn btn-default btn-lg pull-right' %>
+      </div>
+
+      <div class="task-header-actions-sm">
+        <%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, me_vehicle_orders_path(@vehicle), :class => 'btn btn-default btn-lg pull-right' %>
+      </div>
+      <h2><%= @page_title %></h2>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3>Trabajos</h3>
+
+    <% if @order.tasks.any? %>
+      <p>A continuación se listan los trabajos (actividades) realizados sobre tu vehículo.</p>
+
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Estado</th>
+          <th>Última actualización</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @order.tasks.each do |task| %>
+          <tr>
+            <td><%= task.title.titleize %></td>
+            <td><%= status_for(task) %></td>
+            <td><%= task.updated_at.strftime('%d-%m-%Y %H:%M') %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <h3>Aún no hay trabajos en esta orden.</h3>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="well">
+      <h4>Datos de la Orden</h4>
+
+      <dl class="dl-vm">
+        <dt>Estado</dt>
+        <dd><%= status_for(@order) %></dd>
+
+        <dt>Creación</dt>
+        <dd><%= @order.created_at.strftime('%d-%m-%Y %H:%M') %></dd>
+
+        <dt>Última actualización</dt>
+        <dd><%= @order.last_update.strftime('%d-%m-%Y %H:%M') %></dd>
+      </dl>
+    </div>
+  </div>
+</div>

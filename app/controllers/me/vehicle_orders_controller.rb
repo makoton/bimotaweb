@@ -4,11 +4,12 @@ class Me::VehicleOrdersController < ApplicationController
   before_filter :load_order, only: :show
 
   def index
+    @page_title = "Ordenes para tu #{@vehicle.full_name}"
     @orders = @vehicle.orders.page params[:page]
   end
 
   def show
-
+    @page_title = "Orden ##{@order.uuid}"
   end
 
   private

@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= @page_title %> - Bimota Chile</title>
   <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'home' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Bimota Chile</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <% if current_user %>
-        <ul class="nav navbar-nav">
-          <li><%= link_to 'Tus Vehículos', me_vehicles_path %></li>
-        </ul>
-      <% end %>
+<div class="navbar-wrapper">
+  <div class="container">
 
-      <ul class="nav navbar-nav navbar-right">
-        <% if current_user %>
-          <p class="navbar-text">Hola <%= current_user.name.titleize %></p>
-          <% if current_user.role?(:admin) %>
-            <li><%= link_to "<i class='icon-white icon-off'></i> Administración".html_safe, admin_root_path %></li>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="<%= me_root_path %>">Bimota Chile</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <% if current_user %>
+            <ul class="nav navbar-nav">
+              <li><%= link_to 'Tus Vehículos', me_vehicles_path %></li>
+              <li><%= link_to 'Tus Datos', profile_me_user_path %></li>
+            </ul>
           <% end %>
-          <li><%= link_to "<i class='icon-white icon-off'></i> Cerrar Sesión".html_safe, destroy_user_session_path, method: 'delete' %></li>
-        <% else %>
-          <li><%= link_to "<i class='icon-white icon-off'></i> Ingresa".html_safe, new_user_session_path %></li>
-        <% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div>
-</nav>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 col-md-offset-4">
-      <%= render 'shared/messages' %>
+          <ul class="nav navbar-nav navbar-right">
+            <% if current_user %>
+              <p class="navbar-text">Hola <%= current_user.name.titleize %></p>
+              <% if current_user.role?(:admin) %>
+                <li><%= link_to "<i class='icon-white icon-off'></i> Administración".html_safe, admin_root_path %></li>
+              <% end %>
+              <li><%= link_to "<i class='icon-white icon-off'></i> Cerrar Sesión".html_safe, destroy_user_session_path, method: 'delete' %></li>
+            <% else %>
+              <li><%= link_to "<i class='icon-white icon-off'></i> Ingresa".html_safe, new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  </div>
+</div>
+
+<% if @page_id != 'me' %>
+  <div class="container-fluid">
+    <div class="row" style="margin-top: 125px;">
+      <div class="col-md-4 col-md-offset-4">
+        <%= render 'shared/messages' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= yield %>
+      </div>
     </div>
   </div>
+<% else %>
   <div class="row">
     <div class="col-md-12">
       <%= yield %>
     </div>
   </div>
-  <!--/row-->
+<% end %>
 
-</div>
+
+
+
 <!-- /container -->
 
 </body>

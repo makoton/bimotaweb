@@ -2,6 +2,7 @@
 class Me::UsersController < ApplicationController
 
   def show #me page
+    @page_id = 'me'
     if current_user.user_information.blank?
       @user_information = current_user.build_user_information
     end
@@ -14,6 +15,10 @@ class Me::UsersController < ApplicationController
       flash[:success] = 'Se guardaron tus datos con éxito!'
       redirect_to me_root_path
     end
+  end
+
+  def profile
+    @user_information = current_user.user_information || current_user.build_user_information
   end
 
   private
