@@ -5,6 +5,7 @@ gem 'rails', '~> 4.2'
 group :development do
   gem 'rubocop', require: false
   gem 'rails_best_practices'
+  gem 'railroady'
 end
 
 group :development, :test do
