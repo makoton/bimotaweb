@@ -15,6 +15,9 @@
 //= require bootstrap-sprockets
 //= require select2
 //= require valida_rut
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
 
 $(document).ready(function () {

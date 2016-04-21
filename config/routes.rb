@@ -18,6 +18,12 @@ Bimotaweb::Application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resources :orders
+    end
+  end
+
   namespace :admin do
     root to: 'orders#index'
 

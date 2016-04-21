@@ -24,7 +24,7 @@ class Admin::OrdersController < Admin::BaseController
         show_orders = [Order::STATUS_CANCELED]
       end
 
-      @orders = Order.where(current_state: show_orders).page params[:page]
+      @orders = Order.includes(:user).where(current_state: show_orders).page params[:page]
     elsif params[:query]
 
       # This complex query should get the results by name no mather what spanish character was entered.
@@ -32,7 +32,7 @@ class Admin::OrdersController < Admin::BaseController
 
       @orders = Order.joins(:user).where(conditions).page params[:page]
     else
-      @orders = Order.page params[:page]
+      @orders = Order.includes(:user).page params[:page]
     end
 
     @total_new_orders = Order.count_by_status(Order::STATUS_NEW)

@@ -28,6 +28,9 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'bootstrap-sass'
+gem 'active_model_serializers'
+
+gem 'react-rails', '~> 1.6.0'
 
 gem 'therubyracer'
 gem 'jquery-rails'

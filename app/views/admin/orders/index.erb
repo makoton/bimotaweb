@@ -46,6 +46,14 @@
 
 <div class="row">
   <div class="col-md-12">
+
+    <%= react_component 'Orders' %>
+
+
+
+
+
+
     <% if @orders && @orders.any? %>
         <table class="table table-striped">
           <thead>
@@ -58,6 +66,12 @@
           </thead>
           <tbody>
           <% @orders.each do |order| %>
+
+
+
+
+
+
               <tr>
                 <td><%= link_to order.uuid, admin_vehicle_order_path(order.vehicle,order) %></td>
                 <td><%= order.user.name%></td>

@@ -86,4 +86,7 @@ Rails.application.configure do
       password: 'notmypassword',
       authentication: 'plain',
       enable_starttls_auto: true}
+
+  #React.js
+  config.react.variant = :production
 end
