@@ -74,7 +74,6 @@ var Orders = React.createClass({
                     </thead>
                     <tbody>
                     {this.state.orders.map(function (order) {
-                        console.log(order);
                         return (
                             <Order key={order.uuid} uuid={order.uuid} user_name={order.user_name} current_state={order.current_state}></Order>
                         )
